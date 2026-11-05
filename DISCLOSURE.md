@@ -69,7 +69,7 @@ Also built during the event, in the private platform and not in this repo: a rea
 
 | Part | In demo mode |
 |---|---|
-| Clinic data | A synthetic clinic: 7 visits, 2 providers, 6 owners, notes, open times. The Lee household has 5 pets. No real practice, patients or owners |
+| Clinic data | A synthetic clinic: 6 visits, 2 providers, 5 owners, notes, open times. The Lee household has 5 pets. No real practice, patients or owners |
 | AI | Mocked until `MODEL_API_KEY` is set; flagged "Mock AI" on screen, and mock letter drafts are flagged. The sample visits come with written clinical notes, so the demo draft gives the same outcome as the real product |
 | Recording | Plays the sample visit into the transcript until a model key is set |
 | Photo outlines | A mock outline until `SAM_ENDPOINT` is set |
