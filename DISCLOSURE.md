@@ -14,9 +14,7 @@ None of this code is in this repository.
 
 ## Built during the hackathon (October 26 to November 4, 2026)
 
-Everything in this repository. The git history starts inside the event window.
-
-This repo's history was moved here on Nov 1, 2026 to remove private partner details; commit dates are unchanged.
+Everything in this repository. This public repository is one snapshot of the code at submission (Nov 4, 2026). The full commit history, every commit inside the event window, is kept in our private repository because it names private partners; we can share it with the judges on request.
 
 | Area | Files |
 |---|---|
@@ -71,7 +69,7 @@ Also built during the event, in the private platform and not in this repo: a rea
 
 | Part | In demo mode |
 |---|---|
-| Clinic data | A synthetic clinic: 6 visits, 2 providers, 5 owners, notes, open times. The Lee household has 5 pets. No real practice, patients or owners |
+| Clinic data | A synthetic clinic: 7 visits, 2 providers, 6 owners, notes, open times. The Lee household has 5 pets. No real practice, patients or owners |
 | AI | Mocked until `MODEL_API_KEY` is set; flagged "Mock AI" on screen, and mock letter drafts are flagged. The sample visits come with written clinical notes, so the demo draft gives the same outcome as the real product |
 | Recording | Plays the sample visit into the transcript until a model key is set |
 | Photo outlines | A mock outline until `SAM_ENDPOINT` is set |
@@ -144,4 +142,4 @@ We used AI coding agents during the event. The team reviewed and tested all code
 | Oct 30 to 31 | Claude (Anthropic) | In this repo: demo mode, Muse Voice Transcribe recording, the patient record, household, search, outside records, week strip, note types, several pets per visit, edit tools, templates, booking links, Remember and the owner summary (server and the first web console). Then the move to the startup's usual open source stack: uv, Ruff and mypy, the Strawberry GraphQL API, Peewee and Alembic storage, Temporal jobs, the new sign in, and the React web app. |
 | Oct 31 to Nov 1 | Claude (Anthropic) | In this repo: roles and permissions, account settings, two step sign in with an authenticator app, referral letters and the letter PDF, the Kokoro read-aloud voice with its pronunciation table, photo capture and edit, and the component library. Then, on Nov 1: the Light, Dark and System theme; speaker labels on the transcript; sign and send to the PIMS with sync status; the redesigned visit page and top bar; the record as one component, the Record tab on every visit page and its own page, replacing the Record side panel, the household page and the Owner and pets tab; the new shared components (action bar, pressable list rows, confirm popover, speaker row, recording and status pills); demo drafts that read like real notes; phone number formatting; "the PIMS" wording on every screen; and guards against runaway or garbled model replies. |
 
-The git history shows which commits came from which phase.
+The table above says which phase built what; the private commit history shows it commit by commit.
