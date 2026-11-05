@@ -1,0 +1,10 @@
+{{ intro }}
+
+{{ letter }}
+
+The signed letter and its attachments are in the PDF attached ({{ extra }}).
+View it online: {{ view_url }}
+
+{{ clinic }}{% if phone %}, {{ phone }}{% endif %}
+
+This email has patient information for its recipient only. If it reached you by mistake, please delete it and let {{ clinic }} know.

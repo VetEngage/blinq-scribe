@@ -1,0 +1,16 @@
+.env
+.git
+**/.venv
+**/__pycache__
+**/.pytest_cache
+**/.ruff_cache
+**/.mypy_cache
+**/.omc
+**/node_modules
+server/var
+server/private
+glasses-ios
+web/dist
+web/test-results
+web/playwright-report
+**/.turbo

@@ -1,0 +1,2450 @@
+"""An alert with its short chip label"""
+type AlertChip {
+  """The full alert"""
+  text: String!
+
+  """
+  About 18 characters: "Towel wrap"
+  """
+  short: String!
+}
+
+"""One appointment on the schedule."""
+type Appointment {
+  id: ID!
+
+  """Clinic-local wall time"""
+  start: DateTime!
+  duration_min: Int!
+  reason: String!
+  type: String!
+  status: String!
+  provider_id: String!
+  provider_name: String!
+  room: String!
+  patient: Patient!
+  client: Client!
+
+  """
+  "not_started", "recording", "draft_ready" or "signed"
+  """
+  visit_status: String!
+  encounter_id: String!
+
+  """
+  Audio is arriving for the visit now (a part in the last 30 seconds, from the glasses or a console): show "Recording"
+  """
+  audio_live: Boolean!
+  note_type: String!
+
+  """Practices that schedule by column: the column's vet, or empty"""
+  column_vet_id: String!
+  column_vet_name: String!
+
+  """
+  A household appointment: every pet booked in it, the appointment's pet first. Empty for a visit booked for one pet
+  """
+  pets: [VisitPet!]!
+
+  """When the visit started in Blinq Scribe, clinic-local wall time"""
+  started_at: DateTime
+
+  """When the practice system checked the pet in (clinic-local), or null"""
+  checked_in_at: DateTime
+
+  """
+  Demo clinic only: its busy day reads as it stands at this clinic-local time ("13:15"). Empty everywhere else
+  """
+  demo_clock: String!
+
+  """
+  When Blinq Scribe read this schedule from the practice system, clinic-local wall time
+  """
+  synced_at: DateTime
+
+  """What you may do on this visit"""
+  can: VisitCan!
+}
+
+type ApprovedRecheck {
+  encounter_id: String!
+  patient: String!
+  reason: String!
+  due_in_days: Int
+  booked_for: String
+
+  """
+  Its booking link: "queued", "sent", "opened", "booked", "expired", or "" when it has none
+  """
+  link: String!
+}
+
+input AssistInput {
+  section: String!
+
+  """
+  "tighten", "bullets", "prose", "repull", "sources", "translate_es" or "custom"
+  """
+  action: String!
+  text: String = null
+  instruction: String! = ""
+}
+
+"""Where part of an answer points: a link chip or a source line"""
+type AssistLink {
+  label: String!
+
+  """
+  "visit", "record", "documents" or "household"
+  """
+  to: String!
+  appointment_id: String!
+  encounter_id: String!
+
+  """The visit's day, when it isn't today"""
+  date: String!
+  patient_id: String!
+  client_id: String!
+  document_id: String!
+}
+
+"""An edit tool suggestion. Nothing is saved."""
+type AssistResult {
+  suggestion: String!
+  sources: [SourceLink!]!
+  unsourced: [String!]!
+  refused: String!
+  mock: Boolean!
+}
+
+input AssistantInput {
+  message: String!
+  history: [ChatTurnInput!]! = []
+  provider_id: String! = ""
+  appointment_id: String! = ""
+  patient_id: String! = ""
+
+  """Pick one to follow assistant_turn(turn_id)"""
+  turn_id: String! = ""
+
+  """
+  The appointment already on screen (Morning's Up next card), so the answer doesn't repeat it
+  """
+  showing: String! = ""
+}
+
+type AssistantReply {
+  reply: String!
+  tools_used: [String!]!
+
+  """Link chips to the visit or the record the answer is about"""
+  links: [AssistLink!]!
+
+  """Where a clinical answer's facts came from"""
+  sources: [AssistLink!]!
+
+  """Two or three questions to ask next"""
+  followups: [String!]!
+}
+
+"""What Ask Blinq is doing for one question."""
+type AssistantTurn {
+  turn_id: String!
+
+  """
+  "checking", then "reply"; or "error"
+  """
+  kind: String!
+  text: String!
+  tools_used: [String!]!
+  at: DateTime!
+}
+
+type AuditEntry {
+  ts: String!
+  actor: String!
+  action: String!
+  detail: JSON!
+}
+
+type AuthStatus {
+  """False only for the open demo: no API token, nobody invited"""
+  login_required: Boolean!
+  options: SignInOptions!
+}
+
+"""Add this to an authenticator app, then confirm a code"""
+type AuthenticatorSetup {
+  """To type in by hand"""
+  secret: String!
+
+  """Draw this as a QR code"""
+  otpauth_uri: String!
+}
+
+"""An online booking link texted to the owner."""
+type BookingLink {
+  url: String!
+
+  """First day, YYYY-MM-DD"""
+  from: String!
+  to: String!
+  expires_at: DateTime
+
+  """
+  "queued", "sent", "opened", "booked" or "expired"
+  """
+  status: String!
+  sent_at: DateTime
+  booked_start: DateTime
+
+  """
+  One link for several pets of the same owner seen that day: every pet it books, in the visit's order. Empty for one pet
+  """
+  pets: [String!]!
+}
+
+"""The morning brief."""
+type Brief {
+  spoken: String!
+
+  """
+  The brief in one sentence, in parts to bold or color; what "needs you" is To do's count (requirement 71)
+  """
+  sentence: [BriefPart!]!
+
+  """Two or three questions to ask about today, from today's data"""
+  suggestions: [String!]!
+  appointments: [String!]!
+  pending_followups: [PendingFollowUp!]!
+  date: String!
+  from_yesterday: [OpenItem!]!
+  heads_up: [HeadsUp!]!
+  new_since_yesterday: [Update!]!
+  mock: Boolean!
+}
+
+"""One part of the brief's sentence"""
+type BriefPart {
+  text: String!
+
+  """"none", "bold" (what needs attention) or "failed" (bold and red)"""
+  emphasis: String!
+
+  """
+  What a counted part counts: "visits", "needs" (To do's count), "failed", "new"; empty for the words between
+  """
+  kind: String!
+}
+
+input ChatTurnInput {
+  role: String!
+  content: String!
+}
+
+"""A pet owner, as the practice system shares them."""
+type Client {
+  id: ID!
+  first_name: String!
+  last_name: String!
+  full_name: String!
+  phones: [String!]!
+  emails: [String!]!
+
+  """
+  "text", "email", "phone" or ""
+  """
+  prefers: String!
+  reminders: String!
+
+  """YYYY-MM-DD or empty"""
+  client_since: String!
+}
+
+type ClientCard {
+  id: ID!
+  name: String!
+  first_name: String!
+  last_name: String!
+  phones: [String!]!
+  emails: [String!]!
+  prefers: String!
+  reminders: String!
+  client_since: String!
+  latest_message: LatestMessage
+}
+
+"""The owner's name and how to reach them"""
+type ClientContact {
+  id: ID!
+  name: String!
+  first_name: String!
+  last_name: String!
+  phones: [String!]!
+  emails: [String!]!
+  prefers: String!
+  reminders: String!
+  client_since: String!
+}
+
+type ClientMessage {
+  at: String!
+
+  """
+  "in" or "out"
+  """
+  direction: String!
+  text: String!
+}
+
+type Clinic {
+  name: String!
+  address: String!
+  phone: String!
+  logo_url: String!
+
+  """
+  The practice system's real name; "" when unknown. Data only: screens say "PIMS"
+  """
+  pims_name: String!
+}
+
+type ComingUp {
+  date: String!
+  text: String!
+  patient_name: String!
+}
+
+"""A Google or Microsoft account that signs you in"""
+type ConnectedAccount {
+  """
+  "google" or "microsoft"
+  """
+  provider: String!
+
+  """As the provider shows it; may be empty"""
+  email: String!
+  connected_at: DateTime
+}
+
+"""The part of the displayed photo to show, 0..1 from the top left"""
+type Crop {
+  x: Float!
+  y: Float!
+  w: Float!
+  h: Float!
+}
+
+input CropInput {
+  x: Float!
+  y: Float!
+  w: Float!
+  h: Float!
+}
+
+"""Date (isoformat)"""
+scalar Date
+
+"""Date with time (isoformat)"""
+scalar DateTime
+
+"""One day on the week strip."""
+type DaySummary {
+  date: String!
+  visits: Int!
+  open: Int!
+  failed: Int!
+
+  """
+  "failed", "open", "done" or "none"
+  """
+  marker: String!
+}
+
+"""A vet in the practice, for the doctor picker"""
+type Doctor {
+  """The vet's provider id"""
+  id: ID!
+  name: String!
+}
+
+"""An outside record. The file is at .../documents/{id}/file."""
+type Document {
+  id: ID!
+  patient_id: String!
+  name: String!
+  pages: Int!
+  content_type: String!
+  uploaded_at: String!
+  key_points: [KeyPoint!]!
+  mock: Boolean!
+  detail: String
+}
+
+type DoneItem {
+  text: String!
+  encounter_id: String!
+}
+
+"""One step of writing the note."""
+type DraftProgress {
+  encounter_id: String!
+
+  """Same for every event of one draft"""
+  run_id: String!
+
+  """
+  "transcript", "photos", "soap", "followups", "confirm", then "done"; "error" if it stopped
+  """
+  step: String!
+
+  """
+  "started", "done" or "failed"
+  """
+  state: String!
+  detail: String!
+  patient_name: String!
+  at: DateTime!
+}
+
+"""One visit for one pet: transcript, note, follow ups."""
+type Encounter {
+  id: ID!
+  appointment_id: String!
+  patient_id: String!
+  provider_id: String!
+  provider_name: String!
+  consent_recorded: Boolean!
+
+  """
+  "glasses", "web" or "upload"
+  """
+  source: String!
+
+  """
+  "recording", "draft_ready" or "signed"
+  """
+  status: String!
+  transcript: String!
+
+  """Who said each transcript line (empty where the transcript is hidden)"""
+  segments: [Segment!]!
+
+  """Audio parts received from the glasses or the console"""
+  parts_received: Int!
+
+  """The highest audio part number received, or -1"""
+  last_part: Int!
+
+  """When the first audio part arrived: the recording timer's start"""
+  first_part_at: DateTime
+
+  """When the latest audio part arrived (glasses or a console)"""
+  last_part_at: DateTime
+
+  """How much audio was recorded, in seconds"""
+  audio_seconds: Float!
+  note: SoapNote
+  followups: [FollowUp!]!
+  photos: [Photo!]!
+  created_at: DateTime!
+  signed_at: DateTime
+  signed_by: String!
+  signed_by_user: String!
+  signed_by_provider_id: String!
+  started_by: String!
+  write_back: WriteBackResult
+
+  """
+  The note, each photo with it and the prescription, and where each stands in the PIMS; empty until signed
+  """
+  pims_items: [PimsItem!]!
+  pims_failing_since: DateTime
+
+  """When a failed save is tried again; null unless retrying"""
+  pims_next_try_at: DateTime
+
+  """
+  The front desk's task to enter the prescription in the PIMS, from the signature; null when the note has no medications
+  """
+  prescription_task: PrescriptionTask
+  patient_ids: [String!]!
+  patient_name: String!
+  client_id: String!
+  owner_name: String!
+  note_type: String!
+  group_id: String!
+
+  """
+  "full" (your visit), "view_only" (another vet's signed note: no transcript) or "status" (status only: a draft in progress, or front office)
+  """
+  view: String!
+
+  """Why parts are empty, e.g. "Draft in progress"; "" when full"""
+  hidden: String!
+
+  """
+  Lines of the last plan the provider asked to cover today that the visit didn't, from the draft
+  """
+  plan_reminders: [PlanReminder!]!
+
+  """What you may do on this visit"""
+  can: VisitCan!
+}
+
+"""The end of day list."""
+type EndOfDay {
+  spoken: String!
+  date: String!
+  visits_seen: Int!
+  appointments: Int!
+  unsigned_notes: [UnsignedNote!]!
+  followups_waiting: [WaitingFollowUp!]!
+  rechecks_approved: [ApprovedRecheck!]!
+  rechecks_booked: Int!
+  rechecks_waiting: Int!
+
+  """Rechecks whose booking link went to the owner"""
+  recheck_links_sent: Int!
+
+  """Of those, how many the owner booked"""
+  recheck_links_booked: Int!
+  queued_for_staff: [QueuedItem!]!
+  not_started: [String!]!
+  left_to_do: [OpenItem!]!
+  done_today: [DoneItem!]!
+  waiting_on_owners: [WaitingLink!]!
+  tomorrow: Tomorrow!
+}
+
+type FollowUp {
+  id: ID!
+
+  """
+  "recheck", "client_update", "callback", "lab_result" or "task"
+  """
+  kind: String!
+  reason: String!
+
+  """
+  Short, made by the server for display: "Recheck: ear infection", at most 60 characters. Use it instead of reason in rows and sentences
+  """
+  title: String!
+  due_in_days: Int
+  message_draft: String!
+  suggested_slots: [Slot!]!
+
+  """
+  "draft", "approved" or "dismissed"
+  """
+  status: String!
+  sms: SmsResult
+  booked_slot: Slot
+  booking: WriteBackResult
+
+  """
+  "link" or "book"
+  """
+  booking_mode: String!
+  booking_link: BookingLink
+
+  """A referral: offer Create referral letter"""
+  suggest_letter: Boolean!
+
+  """
+  A booking link not booked 3 days after it was sent gets one reminder text
+  """
+  remind_unbooked: Boolean!
+
+  """That reminder text, once it went (or was tried)"""
+  reminder: SmsResult
+}
+
+input FollowUpActionInput {
+  """
+  "approve", "dismiss", "retry_text" or "book"
+  """
+  action: String!
+  message_draft: String = null
+  slot_start: DateTime = null
+
+  """
+  "link" or "book"
+  """
+  booking_mode: String = null
+
+  """
+  With a booking link: one reminder text if it isn't booked 3 days after it was sent (on unless false)
+  """
+  remind_unbooked: Boolean = null
+}
+
+type FollowingText {
+  followup_id: String!
+  kind: String!
+  reason: String!
+
+  """The text the owner will get"""
+  message: String!
+}
+
+type HeadsUp {
+  text: String!
+  appointment_id: String!
+  patient_id: String!
+  patient_name: String!
+  time: String!
+}
+
+type Health {
+  ok: Boolean!
+  ai: String!
+  practice: String!
+  stt: String!
+  sam: String!
+  sms: String!
+
+  """
+  Read aloud: "kokoro" or "browser"
+  """
+  tts: String!
+
+  """The demo clinic's busy day (YYYY-MM-DD), or empty"""
+  busy_day: String!
+}
+
+"""The household page."""
+type Household {
+  client: ClientCard!
+  pets: [HouseholdPet!]!
+  balance: Float
+
+  """The clinic's online booking link, or empty when it has none"""
+  book_url: String!
+  spend_12m: Float!
+  coming_up: [ComingUp!]!
+  messages: [ClientMessage!]!
+  remember: [RememberItem!]!
+  mock: Boolean!
+}
+
+type HouseholdPet {
+  id: ID!
+  name: String!
+  species: String!
+  breed: String!
+  age: Int
+  sex: String!
+  alerts: [String!]!
+  last_visit: LastVisit
+  due: [String!]!
+
+  """The reminder that comes first, for the Next due column"""
+  next_due: NextDue
+
+  """
+  Plain facts, like "Senior"
+  """
+  tags: [String!]!
+
+  """Each alert's short label"""
+  alert_tags: [String!]!
+  today: TodayVisit
+  spend_12m: Float!
+}
+
+type Invite {
+  user: User!
+  invite_url: String!
+}
+
+type InviteInfo {
+  name: String!
+  username: String!
+}
+
+type Invoice {
+  id: ID!
+  date: String!
+  patient_id: String!
+  patient_name: String!
+  visit: String!
+  provider_name: String!
+  total: Float!
+
+  """
+  "paid" or "open"
+  """
+  status: String!
+  items: [InvoiceItem!]!
+  paid_by: String
+}
+
+type InvoiceItem {
+  name: String!
+  qty: Float!
+  price: Float
+}
+
+"""Patient record, Invoices tab. Never a card number."""
+type InvoiceList {
+  balance: Float
+  last_12_months: Float!
+
+  """{date, amount, paid_by}"""
+  last_payment: JSON
+  invoices: [Invoice!]!
+
+  """
+  Invoices per pet id, plus "all"
+  """
+  counts: JSON!
+  mock: Boolean!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](https://ecma-international.org/wp-content/uploads/ECMA-404_2nd_edition_december_2017.pdf).
+"""
+scalar JSON @specifiedBy(url: "https://ecma-international.org/wp-content/uploads/ECMA-404_2nd_edition_december_2017.pdf")
+
+type KeyPoint {
+  text: String!
+  page: Int!
+}
+
+type LastNote {
+  date: String!
+  by: String!
+  other_vet: Boolean!
+  gist: String!
+}
+
+type LastVisit {
+  date: String!
+  reason: String!
+
+  """
+  The visit type ("Sick", "Wellness"), or ""
+  """
+  type: String!
+}
+
+type LatestMessage {
+  at: String!
+  text: String!
+}
+
+"""A letter the clinic sends"""
+type Letter {
+  id: ID!
+  patient_id: String!
+  patient_name: String!
+
+  """The visit, or empty"""
+  encounter_id: String!
+
+  """
+  "referral", "records" or "owner"
+  """
+  kind: String!
+  recipient: LetterRecipient!
+
+  """The vet's own words, as typed"""
+  reason: String!
+
+  """
+  "routine", "soon" or "urgent"
+  """
+  urgency: String!
+  attachments: LetterAttachments!
+  body: String!
+
+  """The owner agreed to share with another clinic"""
+  owner_consent: Boolean!
+
+  """
+  "draft", "sent" or "opened"
+  """
+  status: String!
+
+  """
+  Who wrote the first draft: "muse", "mock" (demo mode) or ""
+  """
+  drafted: String!
+  created_by: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  signed_by: String!
+
+  """
+  As the letter shows it: "Dr. Ana Rivera, DVM"
+  """
+  signer_title: String!
+  signed_at: DateTime
+
+  """Where it went, in words"""
+  sent_to: [String!]!
+  sent: [LetterSend!]!
+  opened_at: DateTime
+
+  """
+  "full", or "summary" for front office and admins who aren't vets (kind, recipient name, status, where it went; no letter or PDF)
+  """
+  view: String!
+  pdf_url: String!
+}
+
+type LetterAttachments {
+  """Signed notes of any of the pet's visits"""
+  note_encounter_ids: [String!]!
+
+  """Exam photos"""
+  photos: [LetterPhoto!]!
+
+  """Received documents"""
+  document_ids: [String!]!
+
+  """Invoices: only when the vet checks them, never by default"""
+  invoice_ids: [String!]!
+}
+
+input LetterAttachmentsInput {
+  note_encounter_ids: [String!]! = []
+  photos: [LetterPhotoInput!]! = []
+  document_ids: [String!]! = []
+  invoice_ids: [String!]! = []
+}
+
+"""What one channel did, or in demo mode would do"""
+type LetterChannelResult {
+  channel: String!
+
+  """
+  "sent", "preview" (nothing went out), "failed", "skipped" or "ready" (print)
+  """
+  status: String!
+  detail: String!
+
+  """email: the address"""
+  to: String!
+
+  """email: the subject"""
+  subject: String!
+
+  """email: the message text"""
+  body: String!
+
+  """owner_text: the text message"""
+  text: String!
+
+  """owner_text: the owner's link; email: the view online link"""
+  url: String!
+  pdf_url: String!
+  expires_at: String
+}
+
+"""Leave a field out to keep it as it is"""
+input LetterInput {
+  """
+  "referral", "records" or "owner"
+  """
+  kind: String = null
+  recipient: LetterRecipientInput = null
+  reason: String = null
+
+  """
+  "routine", "soon" or "urgent"
+  """
+  urgency: String = null
+  attachments: LetterAttachmentsInput = null
+  body: String = null
+  owner_consent: Boolean = null
+}
+
+type LetterPhoto {
+  encounter_id: String!
+  photo_id: String!
+}
+
+input LetterPhotoInput {
+  encounter_id: String!
+  photo_id: String!
+}
+
+type LetterRecipient {
+  name: String!
+  clinic: String!
+  email: String!
+}
+
+input LetterRecipientInput {
+  name: String! = ""
+  clinic: String! = ""
+  email: String! = ""
+}
+
+"""One time the letter went somewhere"""
+type LetterSend {
+  """
+  "email", "owner_text", "owner_email" or "print"
+  """
+  channel: String!
+  to_masked: String!
+  at: DateTime!
+
+  """
+  "sent", "preview", "failed", "skipped" or "ready"
+  """
+  status: String!
+  detail: String!
+}
+
+"""Who is calling"""
+type Me {
+  """
+  "session", "token" or "open"
+  """
+  via: String!
+  user: User
+  admin: Boolean!
+
+  """
+  "vet", "front_office" or "admin"; "" for the API token and the open demo
+  """
+  role: String!
+
+  """Who you are in the PIMS, or ''"""
+  provider_id: String!
+
+  """
+  What you may do, like "note.sign" or "letter.send" (clinical actions on your own visits). The API token and the open demo get all
+  """
+  permissions: [String!]!
+}
+
+type Mutation {
+  """Start a visit. Nothing records until the owner agreed"""
+  start_encounter(input: NewEncounterInput!): Encounter!
+
+  """
+  Add another of the owner's pets to a visit already started. Drafted already, its note waits (Not started) until the draft is redone
+  """
+  add_pet_to_visit(encounter_id: String!, patient_id: String!): Encounter!
+
+  """Add to or replace the transcript"""
+  add_transcript(encounter_id: String!, text: String!, append: Boolean! = true): Encounter!
+
+  """
+  Edit a photo: label, caption, outline, crop, rotation, in_note, show_owner. Refused once the visit is signed. Upload photos with POST /api/encounters/{id}/photos (REST)
+  """
+  update_photo(encounter_id: String!, photo_id: String!, input: PhotoEditInput!): Encounter!
+
+  """
+  Delete a photo: it leaves the note, the summary and every list. Its file is kept until the visit is signed (restore_photo undoes it), then purged. To retake, upload the new photo (REST) then delete the old one. Refused once the visit is signed
+  """
+  delete_photo(encounter_id: String!, photo_id: String!): Encounter!
+
+  """Undo delete_photo, back in its place. Refused once signed"""
+  restore_photo(encounter_id: String!, photo_id: String!): Encounter!
+
+  """Write the note and plan follow ups. Steps go to draft_progress"""
+  draft_note(encounter_id: String!): Encounter!
+
+  """Save the vet's edits. Refused once signed"""
+  save_note(encounter_id: String!, note: SoapNoteInput!): Encounter!
+
+  """Change the note type. Refused once signed"""
+  set_note_type(encounter_id: String!, note_type: String!): Encounter!
+
+  """Edit tool on one section. Saves nothing"""
+  assist(encounter_id: String!, input: AssistInput!): AssistResult!
+
+  """Approve, dismiss, retry the text, or book"""
+  act_on_followup(encounter_id: String!, followup_id: String!, input: FollowUpActionInput!): Encounter!
+
+  """
+  Sign and lock the note. send: true writes it to the PIMS now (Sign and send); false keeps it out until send_to_pims (Sign only)
+  """
+  sign_note(encounter_id: String!, signed_by: String! = "", send: Boolean! = true): SignResult!
+
+  """
+  Send a signed note to the PIMS again, when saving it failed or it is waiting for staff. Only the vet who signed it. A note already written comes back as it is
+  """
+  send_to_pims(encounter_id: String!): WriteBackResult!
+
+  """
+  The front desk entered the prescription in the PIMS: records who and when (audited). Marking it again keeps the first
+  """
+  mark_prescription_entered(encounter_id: String!): Encounter!
+
+  """
+  Keep the last plan's lines the provider ticked for this pet before the visit (asked to cover today). Returns the lines kept
+  """
+  set_plan_checks(appointment_id: String!, patient_id: String!, lines: [String!]!): [String!]!
+
+  """
+  A last plan line the visit didn't cover: "added" (the provider put it in the Plan) or "dismissed". Never blocks signing
+  """
+  act_on_plan_reminder(encounter_id: String!, reminder_id: String!, action: String!): Encounter!
+
+  """Send a booking link again"""
+  resend_booking_link(followup_id: String!): WaitingLink!
+
+  """Keep exactly these suggestions for the household"""
+  keep_remember(encounter_id: String!, keep: [String!]!): [RememberItem!]!
+
+  """Delete a kept Remember item"""
+  forget_remember(client_id: String!, item_id: String!): Boolean!
+  add_template(input: TemplateInput!): Template!
+  update_template(template_id: String!, input: TemplateInput!): Template!
+  delete_template(template_id: String!): Boolean!
+
+  """Share the owner summary. Only after signing"""
+  share_summary(encounter_id: String!, channel: String!, language: String! = "en"): ShareResult!
+
+  """Ask the day assistant. Follow assistant_turn"""
+  ask_assistant(input: AssistantInput!): AssistantReply!
+
+  """Sync the last N days of notes (default 90)"""
+  onboard(days: Int! = 90): OnboardReport!
+
+  """Invite someone; returns their invite link"""
+  invite_user(input: NewUserInput!): Invite!
+
+  """A new invite link for someone"""
+  reinvite_user(user_id: String!): Invite!
+
+  """Rename, relink, change role, or turn off"""
+  update_user(user_id: String!, input: UserUpdateInput!): User!
+
+  """
+  Sign in with email (or username) and password. remember keeps you signed in for 30 days instead of 12 hours
+  """
+  sign_in(login: String!, password: String!, remember: Boolean! = false): SignInPayload!
+
+  """Finish signing in with the 6 digit email code"""
+  verify_sign_in_code(ticket: String!, code: String!): SignInPayload!
+
+  """Email a new code for this sign in"""
+  resend_sign_in_code(ticket: String!): SignInPayload!
+
+  """
+  Where to send the browser for "google" or "microsoft". It comes back to the web app with #oauth=<code> for finish_oauth_sign_in, or #oauth_error=<message>
+  """
+  start_oauth_sign_in(provider: String!, remember: Boolean! = false): String!
+
+  """
+  Signed in: where to send the browser to connect Google or Microsoft to this account. Needs current_password (or a sign in in the last 10 minutes for an account with no password). It comes back with #oauth_link=<code> for finish_oauth_link
+  """
+  connect_oauth_account(provider: String!, current_password: String! = ""): String!
+
+  """
+  Signed in: connect the account from the one-time #oauth_link code. Only the person who started connecting can finish
+  """
+  finish_oauth_link(code: String!): User!
+
+  """Trade the one-time #oauth code for a session"""
+  finish_oauth_sign_in(code: String!): SignInPayload!
+
+  """Sign in as the demo vet (demo mode)"""
+  try_demo_clinic: SignInPayload!
+
+  """Set a password from an invite link"""
+  accept_invite(token: String!, password: String!): SignInPayload!
+
+  """Email a reset link. True whether or not the email has an account"""
+  request_password_reset(email: String!): Boolean!
+
+  """Choose a new password from a #reset link. Signs out everywhere"""
+  reset_password(token: String!, password: String!): Boolean!
+
+  """End this session"""
+  sign_out: Boolean!
+
+  """End every session of yours, on every device"""
+  sign_out_everywhere: Boolean!
+
+  """
+  Set up an authenticator app: needs current_password (or a sign in in the last 10 minutes). Nothing changes until confirm_authenticator
+  """
+  start_authenticator(current_password: String! = ""): AuthenticatorSetup!
+
+  """
+  The first 6 digit code from the app: turns two step sign in on, with the app's codes (an emailed code stays the backup)
+  """
+  confirm_authenticator(code: String!): User!
+
+  """Stop using the app: codes come by email again. Needs current_password"""
+  remove_authenticator(current_password: String! = ""): User!
+
+  """
+  Turn your own two step sign in on or off. Turning it off needs current_password (or a sign in in the last 10 minutes for an account with no password)
+  """
+  set_two_factor(enabled: Boolean!, current_password: String! = ""): User!
+
+  """Require (or stop requiring) email codes for someone (admins)"""
+  set_user_two_factor(user_id: String!, required: Boolean!): User!
+
+  """Sign someone out on every device (admins)"""
+  revoke_user_sessions(user_id: String!): Boolean!
+
+  """End your sessions on every other device; this one stays"""
+  sign_out_other_sessions: Boolean!
+
+  """
+  Change your password. Needs the current one; an account with none yet (Google or Microsoft only) can set one within 10 minutes of signing in. Signs out your other sessions
+  """
+  change_password(new_password: String!, current_password: String! = ""): Boolean!
+
+  """
+  Change your name, or your email (which needs current_password, or a sign in in the last 10 minutes for an account with no password)
+  """
+  update_my_profile(name: String = null, email: String = null, current_password: String! = ""): User!
+
+  """
+  Disconnect Google or Microsoft. Needs current_password (or a recent sign in). Refused if it's your only way to sign in
+  """
+  disconnect_oauth_account(provider: String!, current_password: String! = ""): Boolean!
+
+  """
+  Start a letter (kind referral, records or owner) for a pet, from a visit (encounter_id: its signed note is attached) or from the record (patient_id). Returns Blinq's draft unless draft is false
+  """
+  create_letter(patient_id: String! = "", encounter_id: String! = "", input: LetterInput = null, draft: Boolean! = true): Letter!
+
+  """
+  Blinq drafts the body again, from the signed notes, the attachments and the reason only; gaps become [confirm: ...]. Mock in demo mode
+  """
+  draft_letter(id: String!): Letter!
+
+  """
+  Edit a draft: recipient, reason, attachments, body, owner_consent. Refused once signed
+  """
+  update_letter(id: String!, input: LetterInput!): Letter!
+
+  """
+  Sign and send in one step (or send again): channels email (one PDF to to_email or the recipient), owner_text, owner_email and print; owner_copy adds a text to the owner. Refused while anything is marked to confirm, or without owner_consent for another clinic
+  """
+  send_letter(id: String!, channels: [String!]!, to_email: String! = "", owner_copy: Boolean! = false): SendLetterResult!
+
+  """Delete a draft. Sent letters stay"""
+  delete_letter(id: String!): Boolean!
+
+  """
+  Who is this?: role "tech", "owner" or "other" ("family" and "other_vet" too, and an optional name) for every line from that speaker. Only the visit's vet
+  """
+  name_speaker(encounter_id: String!, speaker_id: String!, role: String!, name: String! = ""): Encounter!
+}
+
+input NewEncounterInput {
+  appointment_id: String!
+  consent_recorded: Boolean!
+  source: String! = "web"
+  patient_ids: [String!]! = []
+  note_type: String! = ""
+}
+
+input NewUserInput {
+  username: String!
+  name: String!
+  provider_id: String! = ""
+  role: String! = "vet"
+  email: String! = ""
+}
+
+type NextAppointment {
+  date: String!
+  time: String!
+  appointment_id: String!
+}
+
+type NextDue {
+  text: String!
+
+  """The day, YYYY-MM-DD"""
+  due: String!
+
+  """
+  "overdue", "soon" or "later"
+  """
+  state: String!
+}
+
+type NextVisit {
+  """
+  "booked", "pick_a_time" or "none"
+  """
+  kind: String!
+  text: String!
+  url: String!
+}
+
+type NoteSection {
+  key: String!
+  label: String!
+}
+
+"""
+A note not signed yet, from any day, in its bucket: ready (drafted, nothing to confirm, every follow up decided) or pending
+"""
+type NoteToSign {
+  encounter_id: String!
+  appointment_id: String!
+  patient_id: String!
+  patient_name: String!
+  owner_name: String!
+  client_id: String!
+  provider_id: String!
+  provider_name: String!
+
+  """The visit's day, YYYY-MM-DD"""
+  date: String!
+
+  """The visit's clinic time, HH:MM"""
+  time: String!
+  visit_reason: String!
+
+  """The first line of the draft's assessment"""
+  assessment: String!
+
+  """
+  "draft_ready" or "recording"
+  """
+  status: String!
+
+  """
+  "ready" or "pending"
+  """
+  bucket: String!
+  to_confirm: Int!
+  followups_undecided: Int!
+
+  """
+  What is left, for a pending note: "1 thing to confirm, 1 follow up to decide", or "Not drafted yet". Empty when ready
+  """
+  reason: String!
+
+  """Days since the visit"""
+  waiting_days: Int!
+}
+
+type NoteType {
+  id: ID!
+  name: String!
+  sections: [NoteSection!]!
+  from_types: [String!]!
+}
+
+type OnboardReport {
+  days: Int!
+  patients: Int!
+  notes: Int!
+  purged: Int!
+  removed: Int!
+  failed_patients: Int!
+  notes_supported: Boolean!
+  profiles_ready: [String!]!
+}
+
+"""Something still to do: sign, approve, a failed text, queued."""
+type OpenItem {
+  """
+  "unsigned", "followup", "failed_text", "not_sent" (signed only: send it to the PIMS), "pims_failed" (couldn't save yet, retrying), "queued" (for the front desk) or "prescription" (the front desk enters it in the PIMS)
+  """
+  kind: String!
+
+  """The whole sentence, for Read aloud and the glasses"""
+  text: String!
+
+  """
+  A short row label without the pet, e.g. "Sign note"
+  """
+  title: String!
+
+  """
+  The To do row's short title with the pet or owner, e.g. "Sign Pepper's note", "Approve Max's follow up", "Text to Jordan didn't send". The whole sentence stays in text
+  """
+  label: String!
+  encounter_id: String!
+  appointment_id: String!
+  patient_id: String!
+
+  """The owner, so their visit can show what failed"""
+  client_id: String!
+
+  """The owner's name, to group one owner's rows"""
+  owner_name: String!
+  date: String!
+  patient_name: String!
+  status: String
+  followup_id: String
+  followup_kind: String
+  reason: String
+  what: String
+
+  """
+  A short line under the title: the follow up's reason, "To Jordan Lee", "Draft ready", or why it was queued
+  """
+  detail: String
+}
+
+type OtherPet {
+  id: ID!
+  name: String!
+  species: String!
+  breed: String!
+  age: Int
+  sex: String!
+  alerts: [String!]!
+  last_visit: LastVisit
+  due: [String!]!
+}
+
+"""An outlined area, in 0..1 fractions of the displayed photo"""
+type OutlineRegion {
+  label: String!
+
+  """[x0, y0, x1, y1]"""
+  box: [Float!]!
+
+  """[x, y] points, or []"""
+  polygon: [[Float!]!]!
+}
+
+input OutlineRegionInput {
+  label: String! = ""
+
+  """[x0, y0, x1, y1], 0..1"""
+  box: [Float!]!
+  polygon: [[Float!]!]! = []
+}
+
+type OwnerHit {
+  id: ID!
+  name: String!
+  phone: String!
+  email: String!
+  pets: [String!]!
+}
+
+"""A text from the owner"""
+type OwnerMessage {
+  """The owner's first name"""
+  who: String!
+  text: String!
+  at: String!
+}
+
+type OwnerSummary {
+  clinic: Clinic!
+  language: String!
+  visit: SummaryVisit!
+
+  """First and last name only"""
+  owner_name: String!
+  pets: [SummaryPet!]!
+  when_to_call: String!
+  translated: Boolean!
+  mock: Boolean!
+}
+
+type PanelVisit {
+  id: ID!
+  date: String!
+
+  """
+  "sick", "wellness" or "other"
+  """
+  kind: String!
+  type: String!
+  reason: String!
+  provider_name: String!
+}
+
+"""A note from an earlier visit, by any vet."""
+type PastNote {
+  id: ID!
+  patient_id: String!
+  date: DateTime!
+  provider_id: String!
+  provider_name: String!
+  text: String!
+
+  """
+  "pims" or "blinq"
+  """
+  source: String!
+
+  """
+  The note by its headings, for SOAP form; empty when it has none (show text then)
+  """
+  sections: [PastNoteSection!]!
+}
+
+"""One heading of a written note and what it says."""
+type PastNoteSection {
+  """
+  "Subjective", "Objective", "Assessment", "Plan", a note type's own heading ("History", "Since last visit"...), "Vitals", "Medications"
+  """
+  label: String!
+  text: String!
+}
+
+"""A past visit on the patient record."""
+type PastVisit {
+  id: ID!
+  date: String!
+  type: String!
+
+  """
+  "sick", "wellness" or "other"
+  """
+  kind: String!
+  reason: String!
+  provider_name: String!
+  appointment_id: String!
+  summary: String!
+  related: Boolean!
+  note: String
+
+  """
+  The note by its headings, for SOAP form; empty when it has none (show note then)
+  """
+  sections: [PastNoteSection!]!
+  medications: [String!]!
+  photos: [VisitPhoto!]!
+}
+
+type Patient {
+  id: ID!
+  name: String!
+  species: String!
+  breed: String!
+  age: Int
+  alerts: [String!]!
+  alert_chips: [AlertChip!]!
+  sex: String!
+  color: String!
+  microchip: String!
+  client_id: String!
+
+  """
+  Short notes the practice system keeps on the pet beyond its alerts (Fear Free and handling notes, medicines given at home), never a medical note. Empty when the system has no such field
+  """
+  pims_notes: [String!]!
+
+  """
+  The last visit before today, when the practice system sends it with the schedule
+  """
+  last_visit: LastVisit
+
+  """
+  The newest weight on file, when the practice system sends it with the schedule
+  """
+  weight: WeightReading
+}
+
+"""Patient record, Client and patient tab."""
+type PatientProfile {
+  patient: PetDetails!
+  weight: Weights!
+  reminders_due: [ReminderDue!]!
+  client: ClientCard
+  other_pets: [OtherPet!]!
+  mock: Boolean!
+}
+
+type PendingFollowUp {
+  encounter_id: String!
+  followup_id: String!
+  kind: String!
+  reason: String!
+
+  """
+  "Approve follow up: <short reason>"
+  """
+  title: String!
+  patient_id: String!
+  patient_name: String!
+
+  """The visit's appointment"""
+  appointment_id: String!
+}
+
+"""Another pet in the household"""
+type PetBasics {
+  id: ID!
+  name: String!
+  species: String!
+  breed: String!
+  age: Int
+  sex: String!
+  alerts: [String!]!
+}
+
+type PetDetails {
+  id: ID!
+  name: String!
+  species: String!
+  breed: String!
+  age: Int
+  sex: String!
+  alerts: [String!]!
+  color: String!
+  microchip: String!
+}
+
+type PetHit {
+  id: ID!
+  name: String!
+  species: String!
+  breed: String!
+  age: Int
+  client_id: String!
+  owner_name: String!
+  last_visit: LastVisit
+  next_visit: NextAppointment
+}
+
+"""
+An exam photo. The original file, at /api/encounters/{id}/photos/{photo id}, is never changed: crop, rotation and outline are drawn on top of it. Coordinates are 0..1 of the photo as a browser displays it (EXIF orientation applied), from the top left; rotation is applied after the crop
+"""
+type Photo {
+  id: ID!
+
+  """What it is, e.g. Left ear canal"""
+  label: String!
+
+  """
+  Blinq's short description of what's visible, never a diagnosis. Editable; the vet's own words are kept as written
+  """
+  caption: String!
+
+  """Blinq's longer description, same rule"""
+  findings: String!
+
+  """SAM 3.1's outlines as returned: [{label, score, box}]"""
+  segments: JSON!
+
+  """The outline shown and edited (starts as SAM's)"""
+  outline: [OutlineRegion!]!
+  crop: Crop
+
+  """0, 90, 180 or 270, clockwise"""
+  rotation: Int!
+
+  """Written back with the signed note and read by the draft"""
+  in_note: Boolean!
+
+  """Shown in the owner's summary"""
+  show_owner: Boolean!
+  taken_at: DateTime!
+  edited_at: DateTime
+
+  """
+  The file's EXIF orientation, 1 to 8 (1 = upright). Browsers apply it; coordinates are already relative to the upright photo
+  """
+  source_orientation: Int!
+}
+
+"""Only the fields sent change. Send crop: null to uncrop"""
+input PhotoEditInput {
+  label: String
+  caption: String
+  findings: String
+  outline: [OutlineRegionInput!]
+  crop: CropInput
+  rotation: Int
+  in_note: Boolean
+  show_owner: Boolean
+}
+
+"""One thing on its way to the PIMS, and where it stands."""
+type PimsItem {
+  """
+  "note", "photo" or "prescription"
+  """
+  kind: String!
+
+  """
+  "note", the photo's id, or "prescription"
+  """
+  id: String!
+
+  """
+  "Note", "Photo: Left ear", "Prescription"
+  """
+  label: String!
+
+  """
+  One of: "sending", "synced" (saved; see synced_at and pims_id), "not_sent" (signed only, or the PIMS can't take it yet: detail says which) or "failed" (couldn't save; tried again every 5 minutes)
+  """
+  status: String!
+  synced_at: DateTime
+  pims_id: String!
+  detail: String!
+}
+
+type PimsRecordRef {
+  name: String!
+  pims_id: String!
+}
+
+"""
+A line of the provider's own last plan, ticked to cover today, that the visit didn't talk about. Quoted as written. A reminder: never blocks signing
+"""
+type PlanReminder {
+  id: ID!
+  text: String!
+
+  """
+  "open", "added" or "dismissed"
+  """
+  status: String!
+}
+
+"""What to know before walking in."""
+type PreRoomCard {
+  spoken: String!
+
+  """
+  Blinq's one line on the visit, facts only: what came in since yesterday, then the last visit
+  """
+  take: String!
+  patient: String!
+  owner: String!
+  reason: String!
+  room: String!
+  alerts: [String!]!
+  last_visit: String!
+  promised: [String!]!
+  last_note: LastNote
+  previous_notes: Int!
+  remember: [String!]!
+  remember_items: [RememberItem!]!
+
+  """The newest visit's medications, as written"""
+  medications: [String!]!
+
+  """
+  Why the visit matters, as facts on record (the last visit, a recheck that was due, care due soon, results in, the owner's latest text quoted). Never advice
+  """
+  why: [String!]!
+
+  """
+  The same facts as short neutral chips: "Recheck overdue", "Owner messaged", "Results in"
+  """
+  prep: [String!]!
+
+  """The owner's latest text, from the last two days"""
+  owner_message: OwnerMessage
+
+  """The last visit's day, YYYY-MM-DD, or empty"""
+  last_visit_on: String!
+
+  """The latest weight on record, "72 lb", or empty"""
+  weight: String!
+
+  """Before you walk in as dated facts, newest first. Never advice"""
+  walk_in: [WalkInEntry!]!
+
+  """
+  Care due within 30 days: "Rabies vaccine due Nov 21"
+  """
+  can_do_today: [String!]!
+}
+
+type PrepareItem {
+  text: String!
+  appointment_id: String!
+  patient_name: String!
+}
+
+"""Enter the prescription in the PIMS: a front desk task"""
+type PrescriptionTask {
+  """
+  "Enter Cefpodoxime for Biscuit in the PIMS"
+  """
+  text: String!
+  medications: [String!]!
+
+  """Who marked it entered; empty until"""
+  done_by: String!
+  done_by_user: String!
+  done_at: DateTime
+}
+
+type Provider {
+  id: ID!
+  name: String!
+  linked_to: String!
+}
+
+type Query {
+  """
+  Everything the visit page's Record panel shows, in one read. Read only and lock-free, so recording and draft_progress carry on
+  """
+  record_panel(patient_id: String!): RecordPanel!
+
+  """
+  Every vet in the practice (provider id and name), for any signed-in role: the doctor picker
+  """
+  doctors: [Doctor!]!
+
+  """
+  Voices for reading aloud. The clip itself is REST: POST /api/speech {text, voice} returns audio/wav
+  """
+  speech_options: SpeechOptions!
+
+  """Which models and data source are live or mock"""
+  health: Health!
+
+  """
+  The demo's sample visit: with appointment_id, that demo pet's own (demo clinic only; otherwise the generic one)
+  """
+  sample_transcript(appointment_id: String! = ""): String!
+
+  """One day's appointments with their visit status"""
+  schedule(date: Date = null, provider_id: String! = ""): [Appointment!]!
+
+  """Week strip: one entry per day, oldest first"""
+  days(from: Date = null, to: Date = null, provider_id: String! = ""): [DaySummary!]!
+
+  """Morning brief"""
+  brief(provider_id: String! = ""): Brief!
+
+  """End of day list"""
+  end_of_day(date: Date = null, provider_id: String! = ""): EndOfDay!
+
+  """
+  Every note not signed yet, any day, newest first, each in its bucket (Ready to sign or Pending): the Notes page
+  """
+  notes_to_sign(provider_id: String! = ""): [NoteToSign!]!
+
+  """What to know before walking in"""
+  pre_room_card(appointment_id: String!): PreRoomCard!
+
+  """A vet's voice profile, or null until it has notes"""
+  voice_profile(provider_id: String!): VoiceProfile
+
+  """
+  The confirm panel before Sign and send or Sign only: where the note goes, what goes, the texts that follow
+  """
+  sign_preview(encounter_id: String!): SignPreview!
+
+  """Earlier notes on the patient from every vet"""
+  patient_notes(patient_id: String!): [PastNote!]!
+
+  """Pets and owners: name, email or phone digits"""
+  search(q: String!): SearchResult!
+
+  """Past visits, newest first"""
+  patient_visits(
+    patient_id: String!
+
+    """
+    "sick", "wellness" or ""
+    """
+    type: String! = ""
+    q: String! = ""
+    related_to: String! = ""
+  ): [PastVisit!]!
+
+  """Patient details, weights, reminders and owner"""
+  patient_profile(patient_id: String!): PatientProfile!
+
+  """Invoices for a household, last 12 months"""
+  client_invoices(client_id: String!, patient_id: String! = ""): InvoiceList!
+
+  """The household page"""
+  client_household(client_id: String!): Household!
+
+  """Outside records with their key points"""
+  patient_documents(patient_id: String!): [Document!]!
+
+  """The note types and their sections"""
+  note_types: [NoteType!]!
+
+  """Visits, newest first; with group_id, one visit's pets"""
+  encounters(group_id: String! = ""): [Encounter!]!
+  encounter(encounter_id: String!): Encounter!
+
+  """Audit log for a visit"""
+  encounter_audit(encounter_id: String!): [AuditEntry!]!
+
+  """Saved phrases: the vet's and the clinic's"""
+  templates(note_type: String! = ""): [Template!]!
+
+  """Booking links sent and not booked yet"""
+  waiting_followups: [WaitingLink!]!
+
+  """Remember suggestions for a visit"""
+  remember_suggestions(encounter_id: String!): RememberSuggestions!
+
+  """Kept Remember items for a household"""
+  client_remember(client_id: String!): [RememberItem!]!
+
+  """The owner summary of a signed visit"""
+  owner_summary(encounter_id: String!, lang: String! = "en"): OwnerSummary!
+
+  """Everyone with a login"""
+  users: [User!]!
+
+  """Practice system providers, with who is linked"""
+  providers: [Provider!]!
+
+  """Whether sign in is needed, and how"""
+  auth_status: AuthStatus!
+
+  """Which ways to sign in are on"""
+  sign_in_options: SignInOptions!
+
+  """Who is calling"""
+  me: Me!
+
+  """The name on an invite link, before setting a password"""
+  invite_info(token: String!): InviteInfo!
+
+  """Your connected Google and Microsoft accounts"""
+  my_connected_accounts: [ConnectedAccount!]!
+
+  """A pet's letters, newest first"""
+  letters(patient_id: String!): [Letter!]!
+
+  """One letter"""
+  letter(id: String!): Letter!
+
+  """The clinic's name, address, phone and logo for a letter"""
+  letterhead: Clinic!
+
+  """Saved contacts: specialists and clinics from past letters"""
+  contacts(q: String! = ""): [LetterRecipient!]!
+}
+
+type QueuedItem {
+  encounter_id: String!
+  patient: String!
+  what: String!
+  detail: String!
+}
+
+"""
+The Record side panel on a visit page, read only: the pet, owner contact, other pets, weight, what's due and recent visits (lines, never notes)
+"""
+type RecordPanel {
+  patient: PetDetails!
+
+  """The pet's id in the practice system (as the adapter gives it)"""
+  pims_patient_id: String!
+
+  """The owner's id there"""
+  pims_client_id: String!
+  weight: Weights!
+  reminders_due: [ReminderDue!]!
+
+  """The latest visits, as many as the panel shows"""
+  recent_visits: [PanelVisit!]!
+  client: ClientContact
+  other_pets: [PetBasics!]!
+  mock: Boolean!
+}
+
+"""Something the owner shared, kept for staff only."""
+type RememberItem {
+  id: ID!
+  client_id: String!
+  patient_id: String!
+  patient_name: String!
+  text: String!
+  kind: String!
+  date: String
+  said_at: String!
+  encounter_id: String!
+  expires_at: String
+  kept_by: String!
+
+  """
+  Who said it, as the transcript labels it: "Jordan Lee · Owner"
+  """
+  said_by: String
+}
+
+type RememberSuggestion {
+  id: ID!
+  text: String!
+  kind: String!
+  date: String
+  transcript_lines: [String!]!
+
+  """
+  Who said it, as the transcript labels it: "Jordan Lee · Owner"
+  """
+  said_by: String!
+  kept: Boolean!
+}
+
+type RememberSuggestions {
+  suggestions: [RememberSuggestion!]!
+  left_out: Int!
+  mock: Boolean!
+}
+
+type ReminderDue {
+  patient_id: String!
+  patient_name: String!
+  text: String!
+  due: String!
+}
+
+type SearchResult {
+  pets: [PetHit!]!
+  owners: [OwnerHit!]!
+}
+
+type SectionStyle {
+  """
+  "bullets" or "prose"
+  """
+  format: String!
+
+  """
+  "brief", "moderate" or "detailed"
+  """
+  length: String!
+}
+
+type SectionStyleEntry {
+  section: String!
+  style: SectionStyle!
+}
+
+"""One transcript line and who said it"""
+type Segment {
+  id: ID!
+
+  """Its line in the transcript, from 1"""
+  line: Int!
+
+  """"vet", "owner", "speaker-3"...; "" when Blinq isn't sure"""
+  speaker_id: String!
+
+  """"Dr. Ana Rivera", "Speaker 3"; "" when Blinq isn't sure"""
+  speaker_name: String!
+
+  """
+  "vet", "owner", "tech", "family", "other_vet", "other" or "unknown"
+  """
+  role: String!
+
+  """Time into the visit"""
+  offset_seconds: Int!
+  text: String!
+
+  """
+  A visit with several pets: the pets this line is about (one, several when it names them, or the ones it could be about when pet_sure is false). Empty for one pet
+  """
+  pets: [String!]!
+
+  """False when Blinq couldn't tell which pet the line is about"""
+  pet_sure: Boolean!
+}
+
+type SendLetterResult {
+  letter: Letter!
+  results: [LetterChannelResult!]!
+}
+
+type ShareResult {
+  channel: String!
+  language: String!
+
+  """
+  "preview", "sent", "ready" or "failed"
+  """
+  status: String!
+  detail: String!
+  text: String!
+  url: String!
+  pdf_url: String!
+  expires_at: String
+  translated: Boolean!
+}
+
+"""Which ways to sign in are on"""
+type SignInOptions {
+  password: Boolean!
+  google: Boolean!
+  microsoft: Boolean!
+
+  """Try the demo clinic (demo mode only)"""
+  demo: Boolean!
+
+  """Forgot password works (email is set up)"""
+  password_reset: Boolean!
+}
+
+"""
+Signed in (token and user), or a 6 digit code to enter first (two_factor_required with a ticket for verify_sign_in_code)
+"""
+type SignInPayload {
+  token: String
+  user: User
+  two_factor_required: Boolean!
+  ticket: String
+
+  """
+  "app": the code from their authenticator app (resend_sign_in_code emails a backup code); "email": a code we emailed
+  """
+  two_factor_method: String
+
+  """Where the code went, like a•••@clinic.com"""
+  email_hint: String
+}
+
+"""
+The confirm panel before signing: where the note goes, what goes, and the texts that follow
+"""
+type SignPreview {
+  """
+  The practice system's real name ("" when unknown); data only, screens say "PIMS"
+  """
+  pims_name: String!
+  patient: PimsRecordRef!
+  owner: PimsRecordRef!
+  appointment: SignPreviewAppointment
+
+  """The note's pet is the one on the visit's appointment"""
+  matches: Boolean!
+
+  """What to check; "" when it matches"""
+  mismatch: String!
+  note: Boolean!
+
+  """Photos going with the note"""
+  photos: Int!
+
+  """The note's medications; prescriptions aren't sent to the PIMS yet"""
+  prescription: [String!]!
+  texts: [FollowingText!]!
+}
+
+type SignPreviewAppointment {
+  id: String!
+  start: DateTime!
+  patient_name: String!
+  owner_name: String!
+}
+
+type SignResult {
+  encounter: Encounter!
+  write_back: WriteBackResult!
+}
+
+type Slot {
+  start: DateTime!
+  end: DateTime!
+  provider_id: String!
+  service_id: String!
+  booking_url: String!
+}
+
+"""A text to the owner, sent or shown as a preview."""
+type SmsResult {
+  """
+  "sent", "preview", "skipped", "failed"
+  """
+  status: String!
+  detail: String!
+  text: String!
+  to_masked: String!
+  provider_id: String!
+  at: DateTime
+}
+
+type SoapNote {
+  subjective: String!
+  objective: String!
+  assessment: String!
+  plan: String!
+
+  """Vital name to value, as written"""
+  vitals: JSON!
+  medications: [String!]!
+
+  """For the owner, plain English"""
+  client_summary: String!
+
+  """Who said the vitals when a tech did: "tech Priya"; else empty"""
+  vitals_by: String!
+}
+
+input SoapNoteInput {
+  subjective: String! = ""
+  objective: String! = ""
+  assessment: String! = ""
+  plan: String! = ""
+  vitals: JSON! = {  }
+  medications: [String!]! = []
+  client_summary: String! = ""
+  vitals_by: String! = ""
+}
+
+type SourceLink {
+  sentence: String!
+
+  """Transcript line numbers, from 1"""
+  lines: [Int!]!
+  text: String!
+}
+
+"""Read aloud: the server's voices, or the browser's"""
+type SpeechOptions {
+  """False: use the browser's voice (POST /api/speech answers 503)"""
+  available: Boolean!
+  default_voice: String!
+  voices: [SpeechVoice!]!
+}
+
+type SpeechVoice {
+  id: ID!
+  name: String!
+  language: String!
+  gender: String!
+}
+
+type Subscription {
+  """
+  Each step of draft_note for this visit, then done. Subscribe before or just after calling draft_note
+  """
+  draft_progress(encounter_id: String!): DraftProgress!
+
+  """
+  What Ask Blinq is checking, then its reply. Pass the same turn_id to ask_assistant
+  """
+  assistant_turn(turn_id: String!): AssistantTurn!
+}
+
+type SummaryPet {
+  patient_id: String!
+  name: String!
+
+  """As the record has it; may be empty"""
+  species: String!
+  breed: String!
+  sex: String!
+
+  """Years; 0 is under a year"""
+  age: Int
+
+  """"6 years" or "6 años"; may be empty"""
+  age_text: String!
+  for_owner: String!
+  medicines: [String!]!
+  home_care: [String!]!
+  next_visit: NextVisit!
+  photos: [SummaryPhoto!]!
+}
+
+"""A photo the vet chose to show the owner"""
+type SummaryPhoto {
+  id: ID!
+  encounter_id: String!
+  label: String!
+  caption: String!
+  url: String!
+  crop: Crop
+  rotation: Int!
+}
+
+"""When the visit was and who saw the pets"""
+type SummaryVisit {
+  """YYYY-MM-DD, clinic-local"""
+  date: String!
+
+  """The appointment time, clinic-local ISO, or null"""
+  start: String
+
+  """
+  Ready to show, in the summary's language: "Sat, Oct 31, 2026 at 1:30 PM" or "sáb. 31 de oct. de 2026, 1:30 p. m."
+  """
+  when: String!
+
+  """The vet who signed, else the booked vet"""
+  provider_name: String!
+}
+
+type Template {
+  id: ID!
+  name: String!
+  shortcut: String!
+  text: String!
+  note_type: String!
+
+  """
+  "me" or "clinic"
+  """
+  owner: String!
+}
+
+input TemplateInput {
+  name: String!
+  shortcut: String!
+  text: String!
+  note_type: String! = ""
+  owner: String! = "me"
+}
+
+type TodayVisit {
+  appointment_id: String!
+  time: String!
+  reason: String!
+  visit_status: String!
+  encounter_id: String!
+}
+
+type Tomorrow {
+  date: String!
+  visits: Int!
+
+  """
+  "HH:MM" or ""
+  """
+  first: String!
+  last: String!
+  prepare: [PrepareItem!]!
+}
+
+type UnsignedNote {
+  encounter_id: String!
+  patient: String!
+  status: String!
+}
+
+type Update {
+  """
+  "result", "reply" or "booked"
+  """
+  kind: String!
+  text: String!
+
+  """
+  A short line to show, e.g. "Kidney panel", "11:30 AM today"
+  """
+  detail: String!
+  at: String!
+  patient_name: String!
+  patient_id: String!
+
+  """Today's appointment for the pet, or empty (booked: the booking)"""
+  appointment_id: String!
+
+  """The owner: a reply opens here"""
+  client_id: String!
+
+  """A result: the received document in the pet's Documents, or empty"""
+  document_id: String!
+  mock: Boolean
+}
+
+type User {
+  id: ID!
+  username: String!
+  name: String!
+  provider_id: String!
+
+  """
+  "vet" or "admin"
+  """
+  role: String!
+  active: Boolean!
+  has_password: Boolean!
+  created_at: DateTime!
+  email: String!
+
+  """Signs in with an email code too"""
+  two_factor: Boolean!
+
+  """An admin requires the email code"""
+  two_factor_required: Boolean!
+
+  """Two step codes come from an authenticator app (email is backup)"""
+  authenticator: Boolean!
+}
+
+input UserUpdateInput {
+  name: String = null
+  email: String = null
+  provider_id: String = null
+  role: String = null
+  active: Boolean = null
+}
+
+"""
+What the signed-in person may do on this visit, from their role and whether it's their own (requirement 62). Permissions only: a signed note is still locked whatever these say
+"""
+type VisitCan {
+  """Start the visit (consent, record)"""
+  start: Boolean!
+
+  """Add audio, transcript and photos"""
+  record: Boolean!
+
+  """Write the note"""
+  draft: Boolean!
+
+  """Edit the note, note type, edit tools"""
+  edit: Boolean!
+
+  """Approve, dismiss or book follow ups"""
+  approve: Boolean!
+  sign: Boolean!
+  edit_photos: Boolean!
+
+  """Keep or forget Remember items"""
+  remember: Boolean!
+  write_letter: Boolean!
+
+  """Share a signed summary"""
+  share: Boolean!
+
+  """Resend a booking link"""
+  resend: Boolean!
+}
+
+"""
+One pet on a household appointment (several pets booked as one visit), with its own reason and where its note stands.
+"""
+type VisitPet {
+  patient: Patient!
+  reason: String!
+
+  """
+  "not_started", "recording", "draft_ready" or "signed"
+  """
+  visit_status: String!
+  encounter_id: String!
+}
+
+type VisitPhoto {
+  id: ID!
+  caption: String!
+  url: String!
+}
+
+"""How a vet writes, learned from their own notes."""
+type VoiceProfile {
+  provider_id: String!
+  notes_used: Int!
+  abbreviations: [String!]!
+
+  """"synced" or "default" (demo only)"""
+  source: String!
+
+  """Format and length per SOAP section"""
+  sections: [SectionStyleEntry!]!
+}
+
+type WaitingFollowUp {
+  encounter_id: String!
+  followup_id: String!
+  patient: String!
+  kind: String!
+  reason: String!
+}
+
+"""A booking link sent and not booked yet."""
+type WaitingLink {
+  encounter_id: String!
+  followup_id: String!
+  patient_id: String!
+  patient_name: String!
+  owner_name: String!
+  reason: String!
+
+  """
+  Short, made by the server for display: "Recheck: ear infection", at most 60 characters. Use it instead of reason in rows and sentences
+  """
+  title: String!
+  url: String!
+  sent_at: String
+  days_waiting: Int!
+  status: String!
+
+  """One link for several pets: every pet it books. Empty for one"""
+  pets: [String!]!
+}
+
+"""One dated fact in Before you walk in, newest first"""
+type WalkInEntry {
+  """YYYY-MM-DD"""
+  date: String!
+
+  """
+  "message" (the owner's latest text), "result" (results that came in), "plan" (the last visit's plan, as checkboxes) or "visit" (a past visit about the same problem)
+  """
+  kind: String!
+
+  """The owner's first name, or the provider who saw the pet"""
+  who: String!
+
+  """Written by the person reading"""
+  mine: Boolean!
+
+  """The message as sent, or the visit's reason and summary"""
+  text: String!
+  items: [WalkInItem!]!
+}
+
+"""One line of a past plan, as a checkbox before the visit"""
+type WalkInItem {
+  """
+  The plan line in plain words: "Recheck in 4 weeks"
+  """
+  text: String!
+
+  """
+  What the record says about it: "Was due Sep 28, not booked"
+  """
+  status: String!
+
+  """
+  From the invoices: "30 tablets dispensed Aug 31, none since"
+  """
+  note: String!
+
+  """
+  Ticked by the provider before the visit: asked to cover today. Set with set_plan_checks
+  """
+  checked: Boolean!
+}
+
+type WeightReading {
+  date: String!
+  value: Float!
+  unit: String!
+  note: String
+}
+
+type Weights {
+  """
+  The newest: a weight written in a visit's note when it is newer than the PIMS's
+  """
+  latest: WeightReading
+
+  """The reading before a weight from a visit, for the change"""
+  previous: WeightReading
+  history: [WeightReading!]!
+}
+
+"""What the practice system did with one write."""
+type WriteBackResult {
+  ok: Boolean!
+
+  """
+  One of: "written" (in the practice system), "queued_for_staff" (not in it: the front desk will file it, and Send to PIMS can try again), "failed" (couldn't save: tried again every 5 minutes, then the front desk after an hour) or "not_sent" (signed only: Send to PIMS)
+  """
+  status: String!
+  detail: String!
+  pims_id: String!
+  start: DateTime
+  at: DateTime
+}

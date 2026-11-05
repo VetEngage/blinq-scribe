@@ -1,0 +1,41 @@
+# role, action. Reading the schedule, records, households and notes needs no line:
+# everyone signed in may. Clinical actions (visit.*, note.*, followup.act, photo.edit,
+# remember.keep, letter.write, letter.sign) also need the visit to be the person's own.
+p, vet, visit.start
+p, vet, visit.record
+p, vet, visit.draft
+p, vet, note.edit
+p, vet, note.sign
+p, vet, followup.act
+p, vet, photo.edit
+p, vet, remember.keep
+p, vet, letter.write
+p, vet, letter.sign
+p, vet, template.manage
+p, vet, link.resend
+p, vet, record.upload
+p, vet, summary.share
+p, vet, letter.send
+p, vet, prescription.enter
+p, front_office, link.resend
+p, front_office, record.upload
+p, front_office, summary.share
+p, front_office, letter.send
+p, front_office, prescription.enter
+p, admin, visit.start
+p, admin, visit.record
+p, admin, visit.draft
+p, admin, note.edit
+p, admin, note.sign
+p, admin, followup.act
+p, admin, photo.edit
+p, admin, remember.keep
+p, admin, letter.write
+p, admin, letter.sign
+p, admin, template.manage
+p, admin, link.resend
+p, admin, record.upload
+p, admin, summary.share
+p, admin, letter.send
+p, admin, prescription.enter
+p, admin, team.manage

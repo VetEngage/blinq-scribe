@@ -1,0 +1,100 @@
+/*
+ * What the components need beyond Tailwind utilities: the icon font, the page base, one focus
+ * ring, and reduced motion. Import after tailwindcss and @blinq-scribe/tokens/theme.css.
+ */
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  /* The page reads in the Body role; every other piece of type names its role. */
+  body {
+    margin: 0;
+    background: var(--color-page);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    @apply text-body;
+  }
+  /* Links are ink with an underline: green is only for the main action and for done. */
+  a {
+    color: var(--color-text);
+    text-decoration-color: var(--color-border-strong);
+    text-underline-offset: 2px;
+  }
+  a:hover {
+    text-decoration-color: currentColor;
+  }
+  /* A bold word in a sentence is Body strong's weight: 700 is never used. */
+  b,
+  strong {
+    font-weight: var(--font-weight-medium);
+  }
+  /* A heading takes its role from its class (text-display, text-title, text-section), never from its level. */
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  [hidden] {
+    display: none !important;
+  }
+  /* One focus ring everywhere, keyboard only. */
+  :focus-visible,
+  textarea:focus,
+  input:focus,
+  select:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 1px;
+  }
+}
+
+@layer components {
+  /* Material Symbols, drawn from data-icon so the icon's name is never read as text. A square the
+     size of the glyph, so layout never waits for the font. */
+  .ms {
+    font-family: var(--font-icon);
+    font-weight: normal;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 1;
+    display: inline-block;
+    flex: none;
+    width: 1em;
+    height: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
+  }
+  .ms::before {
+    content: attr(data-icon);
+  }
+  /* A bare button (see Pressable). Screen classes that come later restyle it. */
+  .pressable {
+    cursor: pointer;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+  }
+  .ms.fill {
+    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+  }
+}
+
+/* Every animation stops when the device asks for reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

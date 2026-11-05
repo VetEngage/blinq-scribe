@@ -1,0 +1,9 @@
+dist
+src/gql
+schema.graphql
+console.html
+playwright-report
+test-results
+src/api/operations.ts
+.omc
+node_modules

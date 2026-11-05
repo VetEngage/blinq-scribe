@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block body %}
+<p style="margin:0 0 12px;">Hi {{ name }},</p>
+<p style="margin:0 0 16px;">Use this code to finish signing in to Blinq Scribe:</p>
+<p style="margin:0 0 16px;font-size:28px;font-weight:700;letter-spacing:6px;">{{ code }}</p>
+<p style="margin:0;">It works for {{ minutes }} minutes.</p>
+{% endblock %}

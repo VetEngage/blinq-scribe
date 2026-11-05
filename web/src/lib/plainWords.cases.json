@@ -1,0 +1,166 @@
+{
+  "words": [
+    [
+      "6yo Golden Retriever",
+      "6 year old Golden Retriever"
+    ],
+    [
+      "a 6 yo dog",
+      "a 6 year old dog"
+    ],
+    [
+      "6 y/o",
+      "6 year old"
+    ],
+    [
+      "6 y.o. cat",
+      "6 year old cat"
+    ],
+    [
+      "6yr old",
+      "6 year old"
+    ],
+    [
+      "a 6-yr-old lab",
+      "a 6 year old lab"
+    ],
+    [
+      "1yo",
+      "1 year old"
+    ],
+    [
+      "14 YO DSH",
+      "14 year old DSH"
+    ],
+    [
+      "8mo puppy",
+      "8 month old puppy"
+    ],
+    [
+      "8 mo kitten",
+      "8 month old kitten"
+    ],
+    [
+      "8 m/o",
+      "8 month old"
+    ],
+    [
+      "Cefpodoxime 100 mg SID x10d",
+      "Cefpodoxime 100 mg once a day for 10 days"
+    ],
+    [
+      "x 10 d",
+      "for 10 days"
+    ],
+    [
+      "x1d",
+      "for 1 day"
+    ],
+    [
+      "x2wk",
+      "for 2 weeks"
+    ],
+    [
+      "ear drops BID",
+      "ear drops twice a day"
+    ],
+    [
+      "q12h PO",
+      "every 12 hours by mouth"
+    ],
+    [
+      "w/ food",
+      "with food"
+    ],
+    [
+      "w/o food",
+      "without food"
+    ],
+    [
+      "yeast + bacterial",
+      "yeast and bacterial"
+    ],
+    [
+      "1 + 2",
+      "1 + 2"
+    ],
+    [
+      "brown d/c in the right ear",
+      "brown discharge in the right ear"
+    ],
+    [
+      "ear d/c",
+      "ear discharge"
+    ],
+    [
+      "d/c meloxicam",
+      "d/c meloxicam"
+    ],
+    [
+      "Biscuit is 6 years old",
+      "Biscuit is 6 years old"
+    ],
+    [
+      "Rx Apoquel 16 mg PO BID x14d, then SID",
+      "Apoquel 16 mg by mouth twice a day for 14 days, then once a day"
+    ],
+    [
+      "Recheck 4 wk",
+      "Recheck in 4 weeks"
+    ],
+    [
+      "recheck in 2 weeks",
+      "recheck in 2 weeks"
+    ],
+    [
+      "Rx: Cefpodoxime 100 mg SID x10d",
+      "Cefpodoxime 100 mg once a day for 10 days"
+    ],
+    [
+      "Bland diet 4d",
+      "Bland diet for 4 days"
+    ],
+    [
+      "Recheck if not eating in 48h",
+      "Recheck if not eating in 48 hours"
+    ],
+    [
+      "1d",
+      "for 1 day"
+    ],
+    [
+      "3D echo",
+      "3D echo"
+    ],
+    [
+      "q24h",
+      "every 24 hours"
+    ]
+  ],
+  "answers": [
+    [
+      "First: **9:00 AM Biscuit - Exam 1**\n\n- 6yo Golden Retriever\n- Last note: Cefpodoxime 100 mg SID x10d, ear drops BID [confirm product/dose/duration]\n",
+      "First: 9:00 AM Biscuit, Exam 1. 6 year old Golden Retriever. Last note: Cefpodoxime 100 mg once a day for 10 days, ear drops twice a day (product, dose and duration not confirmed yet)."
+    ],
+    [
+      "Copy — hearing you clear.",
+      "Copy, hearing you clear."
+    ],
+    [
+      "Recheck in 9–10 days",
+      "Recheck in 9 to 10 days."
+    ],
+    [
+      "**Biscuit**\n- 6yo\n- ear d/c [confirm]",
+      "Biscuit. 6 year old. ear discharge (not confirmed yet)."
+    ],
+    [
+      "Miso is *fractious*. Use a towel wrap.",
+      "Miso is fractious. Use a towel wrap."
+    ],
+    [
+      "Owner wrote: \"shaking again.\"",
+      "Owner wrote: \"shaking again.\""
+    ]
+  ]
+}

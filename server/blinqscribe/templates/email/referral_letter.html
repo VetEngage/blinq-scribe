@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block body %}
+<p style="margin:0 0 16px;">{{ intro }}</p>
+<div style="margin:0 0 16px;white-space:pre-wrap;">{{ letter }}</div>
+<p style="margin:0 0 16px;">The signed letter and its attachments are in the PDF attached ({{ extra }}).</p>
+<p style="margin:0 0 16px;"><a href="{{ view_url }}" style="display:inline-block;background:#1f6f5c;color:#ffffff;text-decoration:none;padding:10px 18px;border-radius:8px;">View it online</a></p>
+<p style="margin:0;">{{ clinic }}{% if phone %}, {{ phone }}{% endif %}</p>
+{% endblock %}
+{% block footer %}This email has patient information for its recipient only. If it reached you by mistake, please delete it and let {{ clinic }} know.{% endblock %}

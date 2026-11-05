@@ -1,0 +1,1729 @@
+@import "tailwindcss";
+
+/* Tokens and the components' base styles come from the workspace packages; this file keeps the
+   layout and the styles that belong to one screen. Type comes only from the roles in the tokens
+   (text-display, text-title, text-section, text-body, text-body-strong, text-meta, text-label, and
+   font-num for numerals), applied here with @apply: a test fails on any size, weight or line set here. */
+@import "@blinq-scribe/tokens/theme.css";
+@import "@blinq-scribe/ui/styles.css";
+@source "../../../packages/ui/src";
+
+:root {
+  /* Layout sizes the screens use, from the tokens. */
+  --control-height: var(--size-control);
+  --control-height-sm: var(--size-control-sm);
+  --control-height-lg: var(--size-control-lg);
+  --topbar-height: var(--size-topbar);
+  --column-left: var(--size-column-left);
+  --chat-width: var(--size-chat);
+  --gap: var(--space-4);
+}
+
+@layer base {
+  #root {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@layer components {
+  .muted {
+    color: var(--color-text-secondary);
+  }
+  .sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .pre {
+    white-space: pre-line;
+  }
+  .tone-success {
+    color: var(--color-primary);
+  }
+  .tone-warning {
+    color: var(--color-warning);
+  }
+  .tone-error {
+    color: var(--color-error);
+  }
+  .tone-ai {
+    color: var(--color-ai);
+  }
+  .tone-neutral {
+    color: var(--color-text-secondary);
+  }
+
+  /* app shell */
+  .topbar {
+    height: var(--topbar-height);
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 24px;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    position: relative;
+    z-index: var(--layer-sticky);
+  }
+  .brand-home {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: calc(var(--column-left) - 36px);
+    border-radius: var(--radius-control);
+  }
+  /* Toasts show inside the bar, between Ask Blinq and the clinic: never over the page. */
+  .topbar-toast {
+    flex: 1 1 auto;
+  }
+  .search-trigger {
+    width: 360px;
+    flex: 0 1 420px;
+    min-width: 200px;
+    height: var(--control-height);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 8px 0 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-control);
+    background: var(--color-page);
+    color: var(--color-text-secondary);
+    @apply text-body;
+    cursor: text;
+    text-align: left;
+  }
+  .search-trigger .ms {
+    font-size: var(--size-icon-sm);
+  }
+  .search-trigger .lbl {
+    flex: 1 1 auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  kbd {
+    @apply text-meta font-num;
+    padding: 0 4px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-control);
+    background: var(--color-surface);
+  }
+  /* The rail on the left, flush to the top bar, and the page beside it. Each scrolls on its own. */
+  .layout {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: var(--column-left) minmax(0, 1fr);
+  }
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+    min-width: 0;
+    min-height: 0;
+  }
+  .col.left {
+    gap: 0;
+    overflow: auto;
+    background: var(--color-surface);
+    border-right: 1px solid var(--color-border);
+  }
+  /* The page's gutters: the pinned bar (ActionBar) reaches past them to both edges and the bottom. */
+  .screen {
+    --page-gutter: 32px;
+    --page-bottom: 24px;
+    overflow: auto;
+    padding: 24px var(--page-gutter) var(--page-bottom);
+  }
+  /* The page scrolls, never a card inside it: a card keeps its full height, so nothing at its
+     end (Waiting on owners, Done today) is clipped or scrolls on its own. */
+  .screen > * {
+    flex-shrink: 0;
+  }
+  .health {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+
+  /* building blocks */
+  /* Every card: the same surface, border and shadow. */
+  .between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .between.wrap {
+    flex-wrap: wrap;
+  }
+  .row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .row.nowrap {
+    flex-wrap: nowrap;
+  }
+  .divided {
+    padding-top: 12px;
+    border-top: 1px solid var(--color-divider);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  details.collapsible > summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  details.collapsible > summary::-webkit-details-marker {
+    display: none;
+  }
+  details.collapsible[open] > summary .chev {
+    transform: rotate(180deg);
+  }
+  .grid2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--gap);
+  }
+
+  /* The pet's name, then its status as grey text: "Biscuit · In progress". */
+  .name-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: 4px;
+    min-width: 0;
+  }
+  .appt-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    @apply text-meta;
+    white-space: nowrap;
+  }
+  /* "1 thing to confirm": said once, in the sign bar, in AI purple with Blinq's diamond. */
+  .confirm-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    @apply text-body-strong;
+    color: var(--color-ai);
+  }
+  .confirm-count::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    flex: none;
+    border-radius: 1px;
+    background: var(--color-ai);
+    transform: rotate(45deg);
+  }
+  /* A help line beside the pinned bar's main action: what it does, in gray. */
+  .action-help {
+    @apply text-meta;
+  }
+  /* Only a visit that's recording gets this (PRD 58): the one red that isn't a failure. */
+  .rec-dot {
+    width: 7px;
+    height: 7px;
+    flex: none;
+    border-radius: var(--radius-pill);
+    background: var(--color-error);
+  }
+
+  /* search */
+  .search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px;
+    padding: 0 4px 0 12px;
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-tile);
+  }
+  .search-list {
+    max-height: min(420px, 60vh);
+    overflow: auto;
+    padding: 0 8px 8px;
+  }
+  .search-group {
+    padding: 12px 8px 4px;
+    @apply text-section;
+  }
+  .result-opt {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: var(--radius-tile);
+    cursor: pointer;
+  }
+  .result-opt[aria-selected="true"] {
+    background: var(--color-surface-muted);
+  }
+  .result-opt .text {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .result-opt .side {
+    text-align: right;
+    @apply text-meta;
+    flex: none;
+  }
+  .search-foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    border-top: 1px solid var(--color-divider);
+    @apply text-meta;
+  }
+
+  /* The Visit tab's panel: the cards between the banner and the pinned bar, spaced as the page is. */
+  .visit-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+    min-width: 0;
+  }
+  .visit-panel[hidden] {
+    display: none;
+  }
+
+  /* the record */
+  .rec-row {
+    border-top: 1px solid var(--color-divider);
+  }
+  /* An open past note reads as text under Section headings, two columns, no boxes. */
+  .past-note .sec-body {
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+  .invoices th,
+  .invoices td {
+    padding: 8px 12px 8px 0;
+    vertical-align: top;
+  }
+  .expand {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 4px;
+    border: 0;
+    background: transparent;
+    color: var(--color-text);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  /* A date is Body text in the text font, never mono. */
+  .expand .date {
+    width: 104px;
+    flex: none;
+    @apply text-body;
+  }
+  .expand .text {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .expand .text b {
+    @apply text-body-strong;
+  }
+  .expand[aria-expanded="true"] .chev {
+    transform: rotate(180deg);
+  }
+  .rec-detail {
+    padding: 0 4px 16px 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .items {
+    width: 100%;
+    border-collapse: collapse;
+    @apply text-body;
+  }
+  /* Table headers are the Label role, the only place it appears. */
+  .items th {
+    text-align: left;
+    @apply text-label;
+    padding: 4px 0;
+  }
+  .items td {
+    padding: 4px 0;
+    border-top: 1px solid var(--color-divider);
+  }
+  .items .num {
+    text-align: right;
+    @apply font-num;
+  }
+  .dropzone {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border: 1px dashed var(--color-border-strong);
+    border-radius: var(--radius-tile);
+    color: var(--color-text-secondary);
+    flex-wrap: wrap;
+    cursor: pointer;
+  }
+  .dropzone.over {
+    background: var(--color-surface-muted);
+    border-color: var(--color-text);
+  }
+  .dropzone:focus-within {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 1px;
+  }
+  /* Account: profile and password on the left, sign in and sessions on the right. */
+  .account-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--gap);
+    align-items: start;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  /* Account: the authenticator app row inside Two-step sign in. */
+  .auth-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid var(--color-divider);
+    border-radius: var(--radius-tile);
+    background: var(--color-page);
+  }
+  .steps-list {
+    margin: 0;
+    padding-left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* Sign in: the demo clinic, for judges and anyone just looking. */
+  .demo-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-tile);
+    background: var(--color-page);
+  }
+
+  /* A note from the practice records with no headings, shown as written. */
+  .note-raw {
+    white-space: pre-wrap;
+    max-width: 90ch;
+  }
+
+  /* The visit at a glance, compact: the pet with its facts and alerts, the visit, the owner. Then a
+     failed text to the owner, if any, and the step bar. */
+  .visit-head {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 24px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-card);
+  }
+  .vh-top {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: 16px 24px;
+    align-items: start;
+  }
+  .vh-pet {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    min-width: 0;
+  }
+  .vh-when,
+  .vh-owner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    min-width: 0;
+  }
+  .vh-reason {
+    overflow-wrap: anywhere;
+  }
+  /* The household's record, Text and Call: quiet, labeled, under the owner's name. */
+  .vh-owner-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-left: -12px;
+  }
+  /* The alert line: cautions labeled, then facts on record, in ink at Meta size. */
+  .vh-alerts {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 16px;
+    @apply text-meta;
+    color: var(--color-text);
+  }
+  /* A text to the owner that didn't send: red, with Retry. Red means failed and nothing else. */
+  .vh-failed {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    border-radius: var(--radius-tile);
+    background: var(--color-error-bg);
+  }
+  /* Space, not a divider: a rule right above the steps' own connector lines read as two lines. */
+  .vh-steps {
+    padding-top: 8px;
+  }
+  /* The visit's state: Meta lines, one each, never chips or pills. (The pet's facts are a FactsLine.) */
+  .vh-state-lines {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .vh-state {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
+    @apply text-meta;
+  }
+  /* Lines under a leading mark (the Signed check) line up with its text. */
+  .vh-state.indent {
+    padding-left: 24px;
+  }
+  /* "Saved to the PIMS": a quiet disclosure that opens the per item list on the page. */
+  .vh-disclose {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: var(--color-border-strong);
+    text-underline-offset: 3px;
+  }
+  .vh-disclose:hover {
+    text-decoration-color: currentColor;
+  }
+
+  /* The content card under the banner: Visit | Record at its top, then plain sections with dividers.
+     A card that is only reference (a transcript, photos, the signed note) is a section here. */
+  .visit-body {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 0 24px 24px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-card);
+  }
+  .visit-tabs {
+    margin: 0 -24px 20px;
+    padding: 0 24px;
+  }
+  .visit-body .visit-panel {
+    gap: 20px;
+  }
+
+  /* Before you walk in: dated facts on a thin line, newest first. Neutral dots, never amber. */
+  .walk-in {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .walk-timeline {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .walk-entry {
+    position: relative;
+    display: grid;
+    grid-template-columns: 72px 16px minmax(0, 1fr);
+    gap: 0 8px;
+    align-items: start;
+  }
+  .walk-entry + .walk-entry::before {
+    content: "";
+    position: absolute;
+    left: 87px;
+    top: -16px;
+    height: 20px;
+    width: 1px;
+    background: var(--color-divider);
+  }
+  .walk-date {
+    @apply text-meta;
+    text-align: right;
+    white-space: nowrap;
+  }
+  /* Filled, so it reads as a point on the line, not another checkbox beside the plan's. */
+  .walk-dot {
+    width: 8px;
+    height: 8px;
+    margin: 6px 0 0 4px;
+    border-radius: var(--radius-pill);
+    background: var(--color-border-strong);
+  }
+  .walk-plan {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  /* "Was due Sep 28, not booked": bold ink with a small icon, never small gray. */
+  .walk-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--color-text);
+  }
+
+  /* Pets in this visit, on one line with the note type. */
+  .visit-pets {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 16px;
+  }
+  .add-pet {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    height: var(--size-control-sm);
+    padding: 0 8px;
+    border: 0;
+    border-radius: var(--radius-control);
+    background: transparent;
+    @apply text-body-strong;
+    color: var(--color-text);
+    cursor: pointer;
+  }
+  .add-pet:hover {
+    background: var(--color-surface-muted);
+  }
+
+  /* Previous notes: one line each, opening to the note. */
+  .prev-notes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .prev-note {
+    border-top: 1px solid var(--color-divider);
+  }
+  .prev-note-row {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-text);
+    text-align: left;
+    cursor: pointer;
+    font: inherit;
+  }
+
+  /* The draft and, beside it, what to have in mind: the last plan, the owner's message, the transcript. */
+  .review-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 32px;
+    align-items: start;
+  }
+  .review-aside {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .review-aside > section {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .review-aside > section + section {
+    padding-top: 16px;
+    border-top: 1px solid var(--color-divider);
+  }
+  .aside-title {
+    @apply text-label;
+  }
+  .aside-quote {
+    padding: 8px 12px;
+    border-radius: var(--radius-tile);
+    background: var(--color-page);
+  }
+  .note-draft {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    scroll-margin-top: 12px;
+  }
+  .note-draft > .note-sec {
+    padding-top: 16px;
+    border-top: 1px solid var(--color-divider);
+  }
+  /* What Blinq wrote: a 2 px purple rule on the left, a time chip at the end of each line. */
+  .ai-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-left: 12px;
+    border-left: 2px solid var(--color-ai);
+    overflow-wrap: anywhere;
+  }
+  .ai-line {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .ai-gap {
+    height: 4px;
+  }
+  /* A line's time chip shows when the provider points at the line or tabs to the chip, so a note
+     doesn't read as a column of times. "No source" stays: it is the one that needs a look. Touch
+     screens can't point, so there the chips always show. */
+  @media (hover: hover) {
+    .ai-line .source-chip,
+    .vitals-line .source-chip {
+      opacity: 0;
+      transition: opacity 120ms ease-out;
+    }
+    .ai-line:hover .source-chip,
+    .vitals-line:hover .source-chip,
+    .source-chip:focus-visible {
+      opacity: 1;
+    }
+  }
+  .no-source {
+    flex: none;
+    @apply text-meta;
+    white-space: nowrap;
+  }
+  /* Something to confirm, at its field: purple (Blinq isn't sure), with Confirm and Edit right there. */
+  .confirm-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    border-radius: var(--radius-tile);
+    background: var(--color-ai-bg);
+    scroll-margin: 96px;
+  }
+  .confirm-item.inline {
+    display: inline-flex;
+    gap: 8px;
+    padding: 4px 8px;
+  }
+  .confirm-item.flash {
+    outline: 2px solid var(--color-ai);
+    outline-offset: 2px;
+  }
+  .note-sec.vitals-line {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 24px;
+  }
+  .sync-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-ai);
+  }
+  /* "Then: Sign and send to the PIMS": what the main action leads to, quiet. */
+  .then-line {
+    @apply text-meta;
+  }
+  /* The editor: the text box over a copy of its text that draws each thing to confirm as a chip. */
+  .confirm-area {
+    position: relative;
+  }
+  .confirm-back {
+    position: absolute;
+    inset: 0;
+    padding: 8px 12px;
+    border: 1px solid transparent;
+    @apply text-body;
+    color: var(--color-text);
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  /* letters (Documents, sent) */
+  .letter-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: var(--gap);
+    align-items: start;
+  }
+  /* The draft as it will print: a white page on the clinic's letterhead. It carries the theme-light
+     class, so it stays white paper with dark text in dark mode; the shadow still comes from the page. */
+  .letter-page {
+    color: var(--color-text);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-tile);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-card);
+  }
+  .letterhead {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--color-text);
+  }
+  /* What Blinq drafted carries a violet rule, as in the note. */
+  .letter-body {
+    white-space: pre-wrap;
+    padding-left: 12px;
+    border-left: 2px solid var(--color-ai-bg);
+    max-width: 90ch;
+  }
+  .attach-row {
+    padding: 8px 0;
+    border-top: 1px solid var(--color-divider);
+    align-items: flex-start;
+  }
+  .consent-box {
+    padding: 12px;
+    border-radius: var(--radius-tile);
+    background: var(--color-page);
+    border: 1px solid var(--color-divider);
+  }
+
+  .points {
+    margin: 0;
+    padding-left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* visit pieces */
+  .photos {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .photo {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .frame {
+    position: relative;
+    width: 150px;
+    height: 112px;
+    flex: none;
+    border-radius: var(--radius-tile);
+    overflow: hidden;
+    background: var(--color-divider);
+  }
+  .frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  /* Photos open to edit: the pencil says so. */
+  .frame .edit-badge {
+    position: absolute;
+    right: 6px;
+    bottom: 6px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-pill);
+    background: var(--color-surface);
+    color: var(--color-text);
+    box-shadow: var(--shadow-card);
+  }
+  .frame .outline {
+    position: absolute;
+    border: 2px solid var(--color-ai);
+    border-radius: var(--radius-control);
+  }
+  .followup-head {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .followup-head > .ms {
+    font-size: var(--size-icon-sm);
+    color: var(--color-text-secondary);
+  }
+  .followup-title {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    column-gap: 12px;
+  }
+  .followup-title b {
+    max-width: 100%;
+    @apply text-body-strong;
+  }
+  .followup-details summary {
+    cursor: pointer;
+    @apply text-meta;
+  }
+  .followup-details p {
+    margin: 4px 0 0;
+    @apply text-meta;
+    overflow-wrap: anywhere;
+  }
+  .note-entry {
+    padding-top: 12px;
+    border-top: 1px solid var(--color-divider);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .note-entry .body {
+    white-space: pre-wrap;
+  }
+  .remember-line {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .remember-line > .ms {
+    color: var(--color-ai);
+    margin-top: 2px;
+  }
+  /* Before you walk in: a gray Remember label, the owner's words, then who it's for and when. */
+  .walk-in-remember {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .walk-in-remember .remember-line {
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 12px;
+  }
+
+  /* The account menu opens from the initials avatar. */
+  .avatar-menu {
+    border-radius: var(--radius-pill);
+  }
+
+  /* Whose day: the provider's name, cut short only when the bar is narrow. */
+  .day-menu {
+    max-width: 300px;
+    min-width: 0;
+    padding-right: 8px;
+  }
+
+  /* account: a short-lived confirmation */
+
+  /* photos: capture and edit (requirement 59) */
+  .photo-stage {
+    display: flex;
+    justify-content: center;
+    background: var(--color-page);
+    border-radius: var(--radius-tile);
+    padding: 8px;
+  }
+  /* As wide as fits, never taller than 56% of the window, always in the photo's own shape. */
+  .photo-stage .photo-view {
+    width: min(100%, calc(56vh * var(--aspect, 1.333)));
+  }
+  .photo-view {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-control);
+    background: var(--color-divider);
+  }
+  .photo-view.fill {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .photo-view canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .photo-view .outline {
+    position: absolute;
+    border: 2px solid var(--color-ai);
+    border-radius: var(--radius-control);
+  }
+  .outline-drawing {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .outline-drawing rect {
+    fill: none;
+    stroke: var(--color-ai);
+    stroke-width: 0.8;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    vector-effect: non-scaling-stroke;
+    animation: draw-outline 2.2s ease-in-out infinite;
+  }
+  @keyframes draw-outline {
+    0% {
+      stroke-dashoffset: 100;
+    }
+    70%,
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+  .box-editor {
+    position: absolute;
+    inset: 0;
+    touch-action: none;
+  }
+  .box {
+    position: absolute;
+    border: 2px solid var(--color-ai);
+    box-shadow: 0 0 0 9999px var(--color-crop-shade);
+  }
+  .box-body {
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    border: 0;
+    cursor: move;
+  }
+  .box-handle {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    margin: -11px 0 0 -11px;
+    border-radius: var(--radius-pill);
+    background: var(--color-surface);
+    border: 2px solid var(--color-ai);
+    padding: 0;
+    cursor: pointer;
+  }
+  .box-handle:focus-visible,
+  .box-body:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+  .h-nw {
+    left: 0;
+    top: 0;
+    cursor: nwse-resize;
+  }
+  .h-n {
+    left: 50%;
+    top: 0;
+    cursor: ns-resize;
+  }
+  .h-ne {
+    left: 100%;
+    top: 0;
+    cursor: nesw-resize;
+  }
+  .h-e {
+    left: 100%;
+    top: 50%;
+    cursor: ew-resize;
+  }
+  .h-se {
+    left: 100%;
+    top: 100%;
+    cursor: nwse-resize;
+  }
+  .h-s {
+    left: 50%;
+    top: 100%;
+    cursor: ns-resize;
+  }
+  .h-sw {
+    left: 0;
+    top: 100%;
+    cursor: nesw-resize;
+  }
+  .h-w {
+    left: 0;
+    top: 50%;
+    cursor: ew-resize;
+  }
+  .camera-view {
+    background: var(--color-media);
+    border-radius: var(--radius-tile);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+  }
+  .camera-view video {
+    width: 100%;
+    max-height: 50vh;
+    display: block;
+  }
+  .photo-thumb {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    width: 100%;
+    padding: 4px;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    border-radius: var(--radius-tile);
+  }
+  .photo-thumb:hover {
+    background: var(--color-page);
+  }
+
+  /* recording and drafting the note (loading states) */
+  .live-words {
+    @apply text-body;
+  }
+  /* Record, Load sample visit, Save text: one row of the same outlined button; full width on a phone. */
+  .capture-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    /* The same air above the next part's divider as it has below it (.divided), so the line never
+       sits on the buttons. */
+    padding-bottom: 12px;
+  }
+  @media (max-width: 600px) {
+    .capture-row {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+  }
+  .live-words .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    background: var(--color-text);
+    vertical-align: text-bottom;
+    margin-left: 2px;
+    animation: var(--animate-blink);
+  }
+  .steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .steps li {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .steps li[data-state="pending"] {
+    color: var(--color-text-disabled);
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* note editor */
+  .pet-switch {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    padding: 4px;
+    border-radius: var(--radius-tile);
+    background: var(--color-page);
+    border: 1px solid var(--color-divider);
+    align-self: flex-start;
+    max-width: 100%;
+  }
+  .pet-tab {
+    height: 32px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: var(--radius-control);
+    background: transparent;
+    @apply text-body-strong;
+    color: var(--color-text-secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+  }
+  .pet-tab[aria-pressed="true"] {
+    background: var(--color-surface);
+    color: var(--color-text);
+    box-shadow: var(--shadow-card);
+  }
+  /* A household visit: one tab per pet at the top of the content card, each with its note's status. */
+  .pet-tabs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--color-divider);
+    max-width: 100%;
+  }
+  .pet-tab-h {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    max-width: 240px;
+    padding: 8px 16px 12px 4px;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: var(--color-text);
+    cursor: pointer;
+  }
+  .pet-tab-h:hover {
+    border-bottom-color: var(--color-border);
+  }
+  .pet-tab-h.here {
+    border-bottom-color: var(--color-primary);
+  }
+  /* One recording for the room, split by pet. */
+  .room-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--color-divider);
+  }
+  .note-sec {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    scroll-margin-top: 12px;
+  }
+  .sec-title {
+    @apply text-section;
+  }
+  /* Prose wraps at about 90 characters on wide screens; the panel still fills the card. */
+  .sec-body {
+    white-space: pre-wrap;
+    padding: 12px max(12px, calc(100% - 90ch)) 12px 12px;
+    border-radius: var(--radius-tile);
+    background: var(--color-page);
+    border: 1px solid var(--color-divider);
+    overflow-wrap: anywhere;
+  }
+  .sec-body.clamped {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  /* A source's transcript line, just jumped to: a quiet fill for a moment. */
+  li.flash {
+    background: var(--color-surface-muted);
+    box-shadow: 0 0 0 4px var(--color-surface-muted);
+    transition: background-color 0.3s;
+  }
+  .sec-editor {
+    position: relative;
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-tile);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .toolbar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .suggest {
+    border: 1px solid var(--color-ai);
+    border-radius: var(--radius-tile);
+    padding: 12px;
+    background: var(--color-ai-bg);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .suggest .body {
+    white-space: pre-wrap;
+    color: var(--color-text);
+  }
+  .sources {
+    margin: 0;
+    padding-left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    @apply text-meta;
+  }
+  .tpl-menu {
+    position: absolute;
+    right: 10px;
+    top: 48px;
+    z-index: var(--layer-popover);
+    width: min(320px, calc(100% - 20px));
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-tile);
+    box-shadow: var(--shadow-pop);
+    padding: 4px;
+  }
+  .tpl-opt {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px;
+    border: 0;
+    border-radius: var(--radius-control);
+    background: transparent;
+    color: var(--color-text);
+    cursor: pointer;
+    @apply text-body-strong;
+    text-align: left;
+  }
+  .tpl-opt[aria-current="true"],
+  .tpl-opt:hover {
+    background: var(--color-surface-muted);
+  }
+  /* The pinned action bars (ActionBar: Sign note, Start visit, Draft note, Send) stop short of the
+     Ask Blinq button in the corner. */
+  .signing-as {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: var(--control-height);
+    padding: 0 12px;
+    border: 1px solid var(--color-divider);
+    border-radius: var(--radius-tile);
+    background: var(--color-page);
+    color: var(--color-text-secondary);
+  }
+  .signing-as b {
+    @apply text-body-strong;
+    color: var(--color-text);
+  }
+  .signing-as .ms {
+    color: var(--color-text-secondary);
+  }
+  .rem-item {
+    padding: 12px 0;
+    border-top: 1px solid var(--color-divider);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  /* Under the checkbox's label: the 18px box and its 8px gap. */
+  .rem-item details {
+    padding-left: calc(18px + 8px);
+  }
+  .rem-item summary {
+    cursor: pointer;
+    @apply text-meta;
+  }
+  .rem-item blockquote {
+    margin: 4px 0 0;
+    padding: 4px 8px;
+    border-left: 3px solid var(--color-divider);
+    @apply text-meta;
+    white-space: pre-wrap;
+  }
+  .summary-preview {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-tile);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--color-page);
+  }
+  .summary-preview ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  /* sign in */
+  .gate {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+  }
+  .gate .card {
+    width: 100%;
+    max-width: 420px;
+  }
+  .or-rule {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    @apply text-meta;
+  }
+  .or-rule::before,
+  .or-rule::after {
+    content: "";
+    flex: 1 1 auto;
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  /* team */
+  .team-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px solid var(--color-divider);
+    flex-wrap: wrap;
+  }
+  .team-row .text {
+    flex: 1 1 200px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .team-row .text b {
+    @apply text-body-strong;
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .invite-box {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 12px;
+    border-radius: var(--radius-tile);
+    background: var(--color-surface-muted);
+  }
+
+  /* Ask Blinq: the one way in, a pill in the top bar in Blinq's purple: Ask Blinq (⌘J), then the mic. */
+  .ask-pill {
+    flex: none;
+    display: flex;
+    align-items: stretch;
+    height: var(--control-height);
+    border: 1px solid var(--color-ai-bg);
+    border-radius: var(--radius-pill);
+    background: var(--color-ai-bg);
+    color: var(--color-ai-strong);
+  }
+  .ask-pill-open,
+  .ask-pill-mic {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* The deeper purple: the label keeps 4.5:1 on the tint, pressed or not. */
+    color: var(--color-ai-strong);
+    @apply text-body-strong;
+    transition: background-color var(--duration-fast);
+  }
+  .ask-pill-open {
+    gap: 8px;
+    padding: 0 12px 0 12px;
+    border-radius: var(--radius-pill) 0 0 var(--radius-pill);
+    white-space: nowrap;
+  }
+  .ask-pill-open .ms,
+  .ask-pill-mic .ms {
+    font-size: var(--size-icon-sm);
+  }
+  .ask-pill-keys {
+    background: transparent;
+    border-color: color-mix(in srgb, var(--color-ai) 30%, transparent);
+    color: var(--color-ai-strong);
+  }
+  .ask-pill-mic {
+    width: 40px;
+    padding-right: 2px;
+    border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+  }
+  /* Hover and pressed keep the tint (and the contrast) and add a ring. */
+  .ask-pill-open:hover,
+  .ask-pill-mic:hover,
+  .ask-pill-open[aria-expanded="true"],
+  .ask-pill-mic[aria-pressed="true"] {
+    box-shadow: inset 0 0 0 1px var(--color-ai);
+  }
+  .ask-pill-open:focus-visible,
+  .ask-pill-mic:focus-visible {
+    outline-offset: -3px;
+  }
+  .ask-pill-rule {
+    flex: none;
+    width: 1px;
+    margin: 8px 0;
+    background: color-mix(in srgb, var(--color-ai) 25%, transparent);
+  }
+  /* Docked: a full height panel on the right that pushes the page over. */
+  html.ask-docked .layout {
+    margin-right: 420px;
+  }
+}
+
+/* Inside the content card, a card that is only reference (the transcript, photos, sharing, the signed
+   note) is a plain section with a divider. Outside the layers, so a card's own border and shadow don't
+   win. Cards you act on inside them (a follow up) stay cards. */
+.visit-body .visit-panel > .shadow-card {
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.visit-body .visit-panel > :is(*, .shadow-card) + :is(*, .shadow-card):not(:empty) {
+  padding-top: 20px;
+  border-top: 1px solid var(--color-divider);
+}
+.visit-body .visit-panel.review-panel > .review-grid {
+  padding-top: 0;
+  border-top: 0;
+}
+/* A caution in the banner is read in full: it wraps rather than cut short. */
+.vh-alerts [data-caution] .truncate {
+  white-space: normal;
+}
+
+/* The editor's text box draws no text of its own: the copy behind it does, with each thing to confirm
+   as a chip. Outside the layers, so the box's own color and fill don't win. */
+.confirm-input {
+  position: relative;
+  resize: none;
+  overflow: hidden;
+  background: transparent;
+  color: transparent;
+  caret-color: var(--color-text);
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+.confirm-input::selection {
+  color: transparent;
+  background: color-mix(in srgb, var(--color-ai) 22%, transparent);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1400px) {
+  .brand-home {
+    width: auto;
+  }
+  .ask-pill-keys {
+    display: none;
+  }
+}
+@media (max-width: 1280px) {
+  .review-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .review-aside {
+    position: static;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-divider);
+  }
+}
+@media (max-width: 1100px) {
+  .vh-top {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .vh-pet {
+    grid-column: 1 / -1;
+  }
+  .account-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .letter-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* Stacked: the page grows with its content instead of fitting the window, the page first, then the
+     rail. The top bar wraps: search takes its own line, and every control keeps its words. */
+  html,
+  body,
+  #root {
+    height: auto;
+  }
+  .topbar {
+    height: auto;
+    min-height: var(--topbar-height);
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    gap: 8px;
+  }
+  .search-trigger {
+    order: 10;
+    width: 100%;
+    flex: 1 1 100%;
+  }
+  .topbar-toast {
+    order: 11;
+    flex-basis: 100%;
+  }
+  .topbar-toast:empty {
+    display: none;
+  }
+  .layout {
+    flex: none;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .col,
+  .col.left,
+  .screen {
+    min-height: auto;
+    overflow: visible;
+  }
+  .screen {
+    order: -1;
+    --page-gutter: 16px;
+    padding-top: 16px;
+  }
+  .col.left {
+    border-right: 0;
+    border-top: 1px solid var(--color-border);
+  }
+}
+/* Narrow: the clinic moves into the account menu; Ask Blinq and whose day keep their words. */
+@media (max-width: 900px) {
+  .topbar .health {
+    display: none;
+  }
+}
+@media (min-width: 901px) {
+  .menu-clinic {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  .grid2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .expand .date {
+    width: 84px;
+  }
+  /* A phone: the banner and the content card get the page's narrower gutters; everything stacks. */
+  .visit-head {
+    padding: 16px;
+  }
+  .vh-top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .visit-body {
+    padding: 0 16px 16px;
+  }
+  .visit-tabs {
+    margin: 0 -16px 16px;
+    padding: 0 16px;
+  }
+  .walk-entry {
+    grid-template-columns: 56px 16px minmax(0, 1fr);
+  }
+  .walk-entry + .walk-entry::before {
+    left: 71px;
+  }
+  .prev-note-row {
+    flex-wrap: wrap;
+    gap: 4px 12px;
+  }
+  .ai-line {
+    flex-wrap: wrap;
+  }
+  .confirm-item {
+    flex-wrap: wrap;
+  }
+  .rec-detail {
+    padding-left: 4px;
+  }
+}
+@media (max-width: 560px) {
+  .topbar .brand {
+    display: none;
+  }
+  .day-menu {
+    max-width: 200px;
+  }
+  .ask-panel {
+    right: 16px;
+    left: 16px;
+    width: auto;
+    height: min(560px, calc(100vh - 32px));
+  }
+}

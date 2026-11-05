@@ -1,0 +1,147 @@
+{
+  "_note": "Demo mode only (no API keys). The note a real model writes for each sample visit that ships with the app, hand written to the note prompt's rules. Returned when the transcript matches the sample and the visit is for the same pet. Every name here is made up.",
+  "drafts": [
+    {
+      "transcripts": ["sample_visit.txt", "sample_visits/pat-1.txt"],
+      "patient": "Biscuit",
+      "draft": {
+        "subjective": "Owner reports scratching at the right ear and head shaking for about four days, with a mild odor. Eating and playing normally.",
+        "objective": "- Wt 74 lb, T 101.8 F, HR 96\n- Right ear: canal red and swollen with brown discharge, eardrum intact\n- Left ear: normal\n- Right ear cytology: many yeast, some cocci",
+        "assessment": "Right ear infection, yeast and bacterial, likely secondary to allergies.",
+        "plan": "- Right ear cleaned in clinic\n- Start Cefpodoxime 100 mg once a day for ten days\n- Ear drops in the right ear twice a day\n- [confirm: ear drop product and duration]\n- Recheck in two weeks to confirm the infection has cleared\n- Owner to call if not improved in five days",
+        "vitals": {"weight": "74 lb", "temperature": "101.8 F", "heart_rate": "96"},
+        "medications": ["Cefpodoxime 100 mg", "Ear drops, right ear"],
+        "client_summary": "Biscuit has an infection in his right ear, likely from allergies. We cleaned his ear today. Give Cefpodoxime once a day for ten days and the ear drops twice a day. We'd like to see him again in two weeks to make sure the infection has cleared. If he isn't better in five days, call us.",
+        "followups": [
+          {"kind": "recheck", "reason": "Recheck right ear in 2 weeks", "due_in_days": 14, "message_draft": ""}
+        ]
+      }
+    },
+    {
+      "transcripts": ["sample_visits/pat-2.txt"],
+      "patient": "Miso",
+      "draft": {
+        "subjective": "Kidney recheck. Owner reports increased water intake and a wetter litter box. Still eating, but pickier with dry food.",
+        "objective": "- Wt 8.9 lb, T 101.2 F, HR 180, BP 165\n- Examined with a towel wrap\n- Mucous membranes pink, slightly tacky\n- Kidneys small and firm on palpation\n- Blood and urine collected for a kidney panel",
+        "assessment": "Chronic kidney disease, progressing slowly, likely stage two.",
+        "plan": "- Kidney panel submitted, vet to call owner with results\n- Start kidney diet\n- Subcutaneous fluids at home twice weekly [confirm: volume]\n- Recheck kidney values in three months\n- Owner to call if she stops eating",
+        "vitals": {"weight": "8.9 lb", "temperature": "101.2 F", "heart_rate": "180", "blood_pressure": "165", "Mucous membranes": "pink, slightly tacky"},
+        "medications": ["Subcutaneous fluids, twice a week at home"],
+        "client_summary": "Miso's kidney disease is progressing slowly. We took blood and urine for a kidney panel today, and we'll call you with the results. Start her on the kidney diet and give her fluids under the skin at home twice a week. We'd like to recheck her kidney values in three months. Call us if she stops eating.",
+        "followups": [
+          {"kind": "lab_result", "reason": "Call owner with kidney panel results", "due_in_days": null, "message_draft": ""},
+          {"kind": "recheck", "reason": "Recheck kidney values in 3 months", "due_in_days": 90, "message_draft": ""}
+        ]
+      }
+    },
+    {
+      "transcripts": ["sample_visits/pat-3.txt"],
+      "patient": "Rocket",
+      "draft": {
+        "subjective": "Presented for suture removal. Owner reports good compliance with the cone and that the incision looks dry. Activity kept to leash walks.",
+        "objective": "- Wt 41 lb, T 101.5 F, HR 100\n- Incision, right front paw: closed and dry, no swelling or discharge\n- Six sutures removed",
+        "assessment": "Wound healed well, no sign of infection.",
+        "plan": "- Six sutures removed\n- Gradual return to normal activity over the next week\n- Cone off unless licking the site\n- Owner to call if the incision opens or turns red",
+        "vitals": {"weight": "41 lb", "temperature": "101.5 F", "heart_rate": "100"},
+        "medications": [],
+        "client_summary": "Rocket's six stitches came out today, and his paw has healed well. Let him get back to normal activity slowly over the next week. He can go without the cone unless he licks the paw. Call us if the incision opens or turns red.",
+        "followups": []
+      }
+    },
+    {
+      "transcripts": ["sample_visits/pat-4.txt"],
+      "patient": "Luna",
+      "draft": {
+        "subjective": "Presented for annual wellness exam. Owner reports she is eating well, active and sleeps a lot. Loud snoring, and short of breath on hot days.",
+        "objective": "- Wt 24 lb, T 101.4 F, HR 110\n- Eyes, ears and teeth normal\n- Heart and lungs normal on auscultation, upper airway noise typical for the breed\n- Abdomen soft\n- Skin and coat healthy",
+        "assessment": "Healthy young dog. Upper airway noise likely from her short nose (brachycephalic), to be monitored.",
+        "plan": "- Rabies and DHPP boosters given today\n- Start monthly heartworm and flea prevention [confirm: product]\n- Keep walks short in hot weather\n- Next wellness exam in a year",
+        "vitals": {"weight": "24 lb", "temperature": "101.4 F", "heart_rate": "110"},
+        "medications": ["Rabies vaccine", "DHPP vaccine", "Monthly heartworm and flea prevention"],
+        "client_summary": "Luna is healthy. Her noisy breathing is common for her breed, and we'll keep an eye on it. She got her rabies and DHPP boosters today and will start monthly heartworm and flea prevention. Keep walks short on hot days. We'll see her again in a year for her next wellness exam.",
+        "followups": [
+          {"kind": "recheck", "reason": "Annual wellness exam in 1 year", "due_in_days": 365, "message_draft": ""}
+        ]
+      }
+    },
+    {
+      "transcripts": ["sample_visits/pat-5.txt"],
+      "patient": "Pepper",
+      "draft": {
+        "subjective": "Owner reports vomiting twice yesterday and once this morning, mostly food. Drinking and using the litter box normally. Eating less than usual.",
+        "objective": "- Wt 12.2 lb, T 101.9 F, HR 190\n- Bright and alert\n- Mucous membranes pink and moist\n- Abdomen soft, mild discomfort on palpation near the stomach, no masses",
+        "assessment": "Mild stomach upset, likely dietary indiscretion.",
+        "plan": "- Anti-nausea injection given today [confirm: drug and dosing]\n- Bland diet for three days\n- Owner to call if vomiting continues past two days, if he stops eating or seems lethargic",
+        "vitals": {"weight": "12.2 lb", "temperature": "101.9 F", "heart_rate": "190", "Mucous membranes": "pink, moist"},
+        "medications": ["Anti-nausea injection"],
+        "client_summary": "Pepper has a mild stomach upset, likely from something he ate. We gave him an anti-nausea shot today. Feed him a bland diet for three days. Call us if the vomiting goes on past two days, if he stops eating, or if he seems unusually tired.",
+        "followups": []
+      }
+    },
+    {
+      "transcripts": ["sample_visits/pat-6.txt"],
+      "patient": "Waffles",
+      "draft": {
+        "subjective": "Owner reports hind limb weakness since yesterday, wobbly and reluctant to jump onto the couch. Vocalized when picked up this morning.",
+        "objective": "- Wt 25.1 lb, T 101.6 F, HR 104\n- Handled with lift support\n- Pain on palpation of the lower back\n- Hind limb reflexes normal, sensation present in the toes",
+        "assessment": "Back pain, likely a mild disc issue, common in dachshunds.",
+        "plan": "- Start pain medication [confirm: drug and dosing]\n- Strict crate rest for two weeks, no stairs or jumping\n- Recheck in two weeks\n- Owner to call right away if she can't walk or loses bladder control",
+        "vitals": {"weight": "25.1 lb", "temperature": "101.6 F", "heart_rate": "104"},
+        "medications": ["Pain medication"],
+        "client_summary": "Waffles has a sore back, likely from a mild disc problem, which is common in dachshunds. We're starting her on pain medicine. Keep her on strict crate rest for two weeks, with no stairs or jumping. We'd like to see her again in two weeks. Call us right away if she can't walk or loses control of her bladder.",
+        "followups": [
+          {"kind": "recheck", "reason": "Recheck back in 2 weeks", "due_in_days": 14, "message_draft": ""}
+        ]
+      }
+    },
+    {
+      "transcripts": ["sample_visits/household-cli-1.txt"],
+      "patient": "Hazel",
+      "household": true,
+      "draft": {
+        "subjective": "Owner reports stiffness getting up in the mornings for about two weeks, worse after walks.\nSneezing a little since a new hay was started at home.\nRunny nose this morning [confirm pet: Hazel or Mochi].",
+        "objective": "- Wt 27.2 lb, T 101.4 F, HR 92\n- Sore on flexion and extension of both hips\n- Mild muscle loss over the back legs",
+        "assessment": "Arthritis in both hips, fits her age.",
+        "plan": "- Start carprofen 25 mg twice a day for 14 days\n- Continue the joint chew\n- Recheck in two weeks",
+        "vitals": {"weight": "27.2 lb", "temperature": "101.4 F", "heart_rate": "92"},
+        "medications": ["Carprofen 25 mg"],
+        "client_summary": "Hazel has arthritis in both hips. Give her carprofen twice a day for 14 days and keep giving her joint chew. We'd like to see her again in two weeks.",
+        "followups": [
+          {"kind": "recheck", "reason": "Recheck hips in 2 weeks", "due_in_days": 14, "message_draft": ""}
+        ]
+      }
+    },
+    {
+      "transcripts": ["sample_visits/household-cli-1.txt"],
+      "patient": "Kiwi",
+      "household": true,
+      "draft": {
+        "subjective": "Here for a wellness exam.",
+        "objective": "- Wt 88 g\n- Feathers and beak normal\n- Heart and lungs normal",
+        "assessment": "Healthy.",
+        "plan": "Wellness exam done for this year.",
+        "vitals": {"weight": "88 g"},
+        "medications": [],
+        "client_summary": "Kiwi is healthy, and her wellness exam is done for this year.",
+        "followups": []
+      }
+    },
+    {
+      "transcripts": ["sample_visits/household-cli-1.txt"],
+      "patient": "Mochi",
+      "household": true,
+      "draft": {
+        "subjective": "Owner reports eating less hay than usual.\nSneezing a little since a new hay was started at home.",
+        "objective": "- Wt 3.3 lb\n- Front teeth even\n- Abdomen soft, normal gut sounds",
+        "assessment": "Teeth normal. Eating less hay since the hay was changed.",
+        "plan": "- Switch back to the old hay\n- Owner to call if not eating normally by Friday\n- Recheck in two weeks",
+        "vitals": {"weight": "3.3 lb"},
+        "medications": [],
+        "client_summary": "Mochi's teeth look normal. Switch her back to her old hay, and call us if she isn't eating normally by Friday. We'd like to see her again in two weeks.",
+        "followups": [
+          {"kind": "recheck", "reason": "Recheck appetite in 2 weeks", "due_in_days": 14, "message_draft": ""}
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+Hi {{ first }},
+
+{{ clinic }} sent {{ what }}{% if to_whom %} to {{ to_whom }}{% endif %}. A copy is attached as a PDF{% if to_whom %} to bring to the visit{% endif %}.
+
+Questions? Call {{ clinic }}{% if phone %} at {{ phone }}{% endif %}.

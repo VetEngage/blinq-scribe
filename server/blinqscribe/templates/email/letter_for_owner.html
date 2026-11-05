@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block body %}
+<p style="margin:0 0 12px;">Hi {{ first }},</p>
+<p style="margin:0 0 16px;">{{ clinic }} sent {{ what }}{% if to_whom %} to {{ to_whom }}{% endif %}. A copy is attached as a PDF{% if to_whom %} to bring to the visit{% endif %}.</p>
+<p style="margin:0;">Questions? Call {{ clinic }}{% if phone %} at {{ phone }}{% endif %}.</p>
+{% endblock %}
+{% block footer %}This email is for {{ first }} only. If it reached you by mistake, please delete it and let {{ clinic }} know.{% endblock %}

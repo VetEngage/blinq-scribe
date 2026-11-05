@@ -1,0 +1,349 @@
+{
+  "_note": "Synthetic demo clinic. Every name, pet and phone number here is made up.",
+  "location": {"id": "mock-loc-1", "name": "Maple Street Animal Hospital (demo)", "address": "120 Maple Street, Springfield", "phone": "+12175550100", "logo_url": "", "pims_name": "AVImark"},
+  "providers": [
+    {"id": "prov-1", "name": "Dr. Ana Rivera"},
+    {"id": "prov-2", "name": "Dr. Sam Okafor"}
+  ],
+  "clients": [
+    {"id": "cli-1", "first_name": "Jordan", "last_name": "Lee", "phones": ["+12175550142"], "emails": ["jordan@example.com"], "prefers": "text", "reminders": "On, by text", "client_since": "2019-04-12", "last_payment": {"days_ago": 58, "amount": 757.5, "paid_by": "Card"}},
+    {"id": "cli-2", "first_name": "Priya", "last_name": "Shah", "phones": ["+12175550153"], "emails": [], "prefers": "phone", "reminders": "On, by phone call", "client_since": "2012-09-03", "last_payment": {"days_ago": 9, "amount": 124.4, "paid_by": "Card"}},
+    {"id": "cli-3", "first_name": "Marcus", "last_name": "Hall", "phones": ["+12175550167"], "emails": ["marcus@example.com"], "prefers": "email", "reminders": "On, by email", "client_since": "2023-06-20", "last_payment": null},
+    {"id": "cli-4", "first_name": "Elena", "last_name": "Cruz", "phones": ["+12175550171"], "emails": [], "prefers": "text", "reminders": "Off", "client_since": "2024-11-02", "last_payment": null},
+    {"id": "cli-5", "first_name": "Tom", "last_name": "Nguyen", "phones": ["+12175550188"], "emails": ["tom@example.com"], "prefers": "email", "reminders": "On, by email", "client_since": "2025-03-15", "last_payment": {"days_ago": 40, "amount": 68, "paid_by": "Cash"}},
+    {"id": "cli-6", "first_name": "Lily", "last_name": "Chen", "phones": ["+12175550161"], "emails": ["lily@example.com"], "prefers": "phone", "reminders": "On, by text", "client_since": "2021-06-02", "last_payment": {"days_ago": 173, "amount": 142, "paid_by": "Card"}},
+    {"id": "cli-7", "first_name": "Oliver", "last_name": "Grant", "phones": ["+12175550175"], "emails": ["oliver@example.com"], "prefers": "text", "reminders": "On, by text", "client_since": "2022-09-20", "last_payment": {"days_ago": 95, "amount": 88, "paid_by": "Card"}},
+    {"id": "cli-8", "first_name": "Ana", "last_name": "Garcia", "phones": ["+12175550193"], "emails": ["ana.garcia@example.com"], "prefers": "email", "reminders": "On, by email", "client_since": "2020-01-11", "last_payment": {"days_ago": 60, "amount": 215, "paid_by": "Card"}},
+    {"id": "cli-9", "first_name": "Sarah", "last_name": "Kim", "phones": ["+12175550201"], "emails": [], "prefers": "text", "reminders": "On, by text", "client_since": "2021-02-14", "last_payment": null},
+    {"id": "cli-10", "first_name": "Daniel", "last_name": "Price", "phones": ["+12175550202"], "emails": [], "prefers": "text", "reminders": "On, by text", "client_since": "2018-07-30", "last_payment": null},
+    {"id": "cli-11", "first_name": "Megan", "last_name": "Doyle", "phones": ["+12175550203"], "emails": ["megan@example.com"], "prefers": "email", "reminders": "On, by email", "client_since": "2026-08-19", "last_payment": null},
+    {"id": "cli-12", "first_name": "Rachel", "last_name": "Adams", "phones": ["+12175550204"], "emails": [], "prefers": "phone", "reminders": "On, by phone call", "client_since": "2015-05-06", "last_payment": null},
+    {"id": "cli-13", "first_name": "Ben", "last_name": "Torres", "phones": ["+12175550205"], "emails": [], "prefers": "text", "reminders": "On, by text", "client_since": "2022-03-11", "last_payment": null},
+    {"id": "cli-14", "first_name": "Grace", "last_name": "Wu", "phones": ["+12175550206"], "emails": [], "prefers": "text", "reminders": "On, by text", "client_since": "2019-10-23", "last_payment": null},
+    {"id": "cli-15", "first_name": "Luis", "last_name": "Moreno", "phones": ["+12175550207"], "emails": [], "prefers": "text", "reminders": "On, by text", "client_since": "2020-12-02", "last_payment": null},
+    {"id": "cli-16", "first_name": "Ella", "last_name": "Brooks", "phones": ["+12175550208"], "emails": ["ella@example.com"], "prefers": "email", "reminders": "On, by email", "client_since": "2024-04-17", "last_payment": null},
+    {"id": "cli-17", "first_name": "Nina", "last_name": "Patel", "phones": ["+12175550209"], "emails": [], "prefers": "text", "reminders": "On, by text", "client_since": "2014-09-08", "last_payment": null},
+    {"id": "cli-18", "first_name": "Chris", "last_name": "Bauer", "phones": ["+12175550210"], "emails": [], "prefers": "text", "reminders": "On, by text", "client_since": "2023-01-25", "last_payment": null},
+    {"id": "cli-19", "first_name": "Mark", "last_name": "Ellis", "phones": ["+12175550211"], "emails": [], "prefers": "phone", "reminders": "On, by phone call", "client_since": "2021-08-04", "last_payment": null},
+    {"id": "cli-20", "first_name": "Olivia", "last_name": "Hart", "phones": ["+12175550212"], "emails": [], "prefers": "text", "reminders": "On, by text", "client_since": "2017-11-13", "last_payment": null},
+    {"id": "cli-21", "first_name": "Helen", "last_name": "Ward", "phones": ["+12175550213"], "emails": [], "prefers": "phone", "reminders": "On, by phone call", "client_since": "2013-06-21", "last_payment": null},
+    {"id": "cli-22", "first_name": "Jake", "last_name": "Silva", "phones": ["+12175550214"], "emails": [], "prefers": "text", "reminders": "On, by text", "client_since": "2022-07-07", "last_payment": null},
+    {"id": "cli-23", "first_name": "Amy", "last_name": "Lin", "phones": ["+12175550215"], "emails": ["amy@example.com"], "prefers": "email", "reminders": "On, by email", "client_since": "2025-09-29", "last_payment": null},
+    {"id": "cli-24", "first_name": "Ryan", "last_name": "Cole", "phones": ["+12175550216"], "emails": [], "prefers": "text", "reminders": "On, by text", "client_since": "2020-02-18", "last_payment": null}
+  ],
+  "patients": [
+    {"id": "pat-1", "client_id": "cli-1", "name": "Biscuit", "species": "Canine", "breed": "Golden Retriever", "age": 6,
+     "sex": "Male, neutered", "color": "Golden", "microchip": "900000000000101",
+     "weights": [{"days_ago": 120, "value": 72, "unit": "lb"}, {"days_ago": 300, "value": 70.5, "unit": "lb"}, {"days_ago": 480, "value": 69, "unit": "lb", "note": "Adult weight"}],
+     "reminders": [{"text": "Rabies vaccine", "due_in_days": 20}, {"text": "Heartworm test", "due_in_days": 245}],
+     "alerts": [],
+     "pims_notes": ["Apoquel 16 mg once a day at home for seasonal itch", "Food motivated: the owner brings peanut butter"],
+     "history": [
+       {"days_ago": 62, "reason": "Itchy face", "summary": "Suspect environmental allergy.", "type": "Sick", "provider_id": "prov-1", "medications": ["Apoquel 16 mg PO BID x14d, then SID"]},
+       {"days_ago": 120, "reason": "Annual wellness", "summary": "Healthy. Vaccines updated. Weight 72 lb.", "type": "Wellness", "provider_id": "prov-1", "medications": []},
+       {"days_ago": 300, "reason": "Ear infection, left", "summary": "Resolved after 10 days of drops.", "type": "Sick", "provider_id": "prov-2", "medications": ["Otic drops, left ear BID x10d"]}
+     ]},
+    {"id": "pat-2", "client_id": "cli-2", "name": "Miso", "species": "Feline", "breed": "Domestic Shorthair", "age": 14,
+     "sex": "Female, spayed", "color": "Gray tabby", "microchip": "",
+     "weights": [{"days_ago": 9, "value": 8.9, "unit": "lb", "note": "Down from 9.4 lb"}, {"days_ago": 45, "value": 9.4, "unit": "lb"}, {"days_ago": 200, "value": 9.8, "unit": "lb"}],
+     "reminders": [{"text": "Senior bloodwork", "due_in_days": -5}],
+     "alerts": ["Fractious, use towel wrap", "Kidney values trending up"], "alert_shorts": {"Fractious, use towel wrap": "Towel wrap", "Kidney values trending up": "Kidney values"},
+     "pims_notes": ["Fear Free: towel wrap and a quiet room, examined on the owner's lap", "Gabapentin 100 mg given at home 2 hours before visits", "Amlodipine 0.625 mg once a day at home"],
+     "history": [
+       {"days_ago": 9, "reason": "Increased thirst and urination", "summary": "Hypertension secondary to chronic kidney disease is suspected.", "type": "Sick", "provider_id": "prov-2", "medications": ["Amlodipine 0.625 mg PO SID"]},
+       {"days_ago": 45, "reason": "Senior bloodwork", "summary": "Creatinine slightly high. Recheck in 3 months.", "type": "Wellness", "provider_id": "prov-1", "medications": []}
+     ]},
+    {"id": "pat-3", "client_id": "cli-3", "name": "Rocket", "species": "Canine", "breed": "Border Collie mix", "age": 3,
+     "sex": "Male", "color": "Black and white", "microchip": "900000000000103",
+     "weights": [{"days_ago": 14, "value": 41, "unit": "lb"}],
+     "reminders": [{"text": "DHPP booster", "due_in_days": 60}],
+     "alerts": [],
+     "history": [
+       {"days_ago": 14, "reason": "Laceration, right front paw", "summary": "Sutured. Cone and antibiotics.", "type": "Sick", "provider_id": "prov-1", "medications": ["Cephalexin 500 mg PO BID x10d"]}
+     ]},
+    {"id": "pat-4", "client_id": "cli-4", "name": "Luna", "species": "Canine", "breed": "French Bulldog", "age": 2,
+     "sex": "Female", "color": "Fawn", "microchip": "",
+     "weights": [],
+     "reminders": [{"text": "Annual wellness", "due_in_days": 0}],
+     "alerts": ["Brachycephalic, watch airway under sedation"], "alert_shorts": {"Brachycephalic, watch airway under sedation": "Watch airway"},
+     "pims_notes": ["Fear Free: treats and a lick mat during the exam"],
+     "history": []},
+    {"id": "pat-5", "client_id": "cli-5", "name": "Pepper", "species": "Feline", "breed": "Maine Coon", "age": 1,
+     "sex": "Male, neutered", "color": "Brown tabby", "microchip": "900000000000105",
+     "weights": [{"days_ago": 40, "value": 12.2, "unit": "lb"}, {"days_ago": 200, "value": 9.1, "unit": "lb"}],
+     "reminders": [{"text": "FVRCP booster", "due_in_days": 165}],
+     "alerts": [],
+     "history": [
+       {"days_ago": 40, "reason": "Sneezing and nasal discharge", "summary": "Upper respiratory infection, likely viral.", "type": "Sick", "provider_id": "prov-2", "medications": []},
+       {"days_ago": 200, "reason": "Kitten vaccines", "summary": "Series complete.", "type": "Wellness", "provider_id": "prov-2", "medications": []}
+     ]},
+    {"id": "pat-6", "client_id": "cli-1", "name": "Waffles", "species": "Canine", "breed": "Dachshund", "age": 9,
+     "sex": "Female, spayed", "color": "Red", "microchip": "900000000000106",
+     "weights": [{"days_ago": 30, "value": 25.1, "unit": "lb"}, {"days_ago": 60, "value": 24.5, "unit": "lb"}],
+     "reminders": [{"text": "DHPP booster", "due_in_days": 12}, {"text": "Dental cleaning", "due_in_days": 300}],
+     "alerts": ["Back problems, lift with support"], "alert_shorts": {"Back problems, lift with support": "Back care"},
+     "pims_notes": ["Fish oil and a joint supplement once a day at home", "Examined on a mat on the floor"],
+     "history": [
+       {"days_ago": 30, "reason": "Soft stool after diet change", "summary": "Diet-related diarrhea.", "type": "Sick", "provider_id": "prov-1", "medications": ["Metronidazole 250 mg PO BID x5d"]},
+       {"days_ago": 60, "reason": "Dental cleaning", "summary": "Two extractions. Healed well.", "type": "Dental", "provider_id": "prov-1", "medications": []}
+     ]},
+    {"id": "pat-7", "client_id": "cli-1", "name": "Hazel", "species": "Dog", "breed": "Beagle", "age": 13,
+     "sex": "Female, spayed", "color": "Tricolor", "microchip": "900000000000107", "tags": ["Senior"],
+     "weights": [{"days_ago": 42, "value": 27.4, "unit": "lb"}, {"days_ago": 400, "value": 28.6, "unit": "lb", "note": "Senior wellness"}],
+     "reminders": [{"text": "Bloodwork", "due_in_days": 25}],
+     "alerts": [],
+     "pims_notes": ["Carprofen 50 mg twice a day at home for her hips"],
+     "history": [
+       {"days_ago": 42, "reason": "Decreased appetite", "summary": "Sore tummy and mild tartar. Bland diet for 4 days.", "type": "Sick", "provider_id": "prov-2", "medications": ["Famotidine 10 mg PO BID x7d"]},
+       {"days_ago": 400, "reason": "Senior wellness", "summary": "Healthy for her age. Stiff in the hips. Joint chew started.", "type": "Wellness", "provider_id": "prov-1", "medications": ["Glucosamine chew PO SID"]}
+     ]},
+    {"id": "pat-8", "client_id": "cli-1", "name": "Kiwi", "species": "Bird", "breed": "Cockatiel", "age": 8,
+     "sex": "Female", "color": "Gray and yellow", "microchip": "",
+     "weights": [{"days_ago": 546, "value": 89, "unit": "g"}],
+     "reminders": [{"text": "Wellness exam", "due_in_days": -180}],
+     "alerts": [],
+     "pims_notes": ["Weigh her in the travel cage first"],
+     "history": [
+       {"days_ago": 546, "reason": "Annual wellness", "summary": "Bright and active. Beak and nails trimmed. Weight 89 g.", "type": "Wellness", "provider_id": "prov-1", "medications": []},
+       {"days_ago": 910, "reason": "Annual wellness", "summary": "Healthy. Seed-heavy diet, pellets suggested.", "type": "Wellness", "provider_id": "prov-1", "medications": []}
+     ]},
+    {"id": "pat-9", "client_id": "cli-1", "name": "Mochi", "species": "Rabbit", "breed": "Holland Lop", "age": 2,
+     "sex": "Female, spayed", "color": "Fawn", "microchip": "",
+     "weights": [{"days_ago": 89, "value": 3.4, "unit": "lb"}, {"days_ago": 400, "value": 3.1, "unit": "lb"}],
+     "reminders": [{"text": "Nail trim", "due_in_days": 75}],
+     "alerts": [],
+     "pims_notes": ["Timothy hay and fresh greens at home, pellets cut back last visit"],
+     "history": [
+       {"days_ago": 89, "reason": "Annual wellness", "summary": "Healthy. Teeth even. Eating hay well.", "type": "Wellness", "provider_id": "prov-1", "medications": []},
+       {"days_ago": 400, "reason": "Nail trim and weight check", "summary": "Nails trimmed. Weight up 0.3 lb.", "type": "Wellness", "provider_id": "prov-1", "medications": []}
+     ]},
+    {"id": "pat-10", "client_id": "cli-6", "name": "Nala", "species": "Feline", "breed": "Domestic Shorthair", "age": 12,
+     "sex": "Female, spayed", "color": "Tabby", "microchip": "900000000000110",
+     "weights": [{"days_ago": 173, "value": 9.3, "unit": "lb"}, {"days_ago": 540, "value": 10.1, "unit": "lb"}],
+     "reminders": [{"text": "Senior bloodwork", "due_in_days": 9}],
+     "alerts": ["Fearful, use towel wrap"],
+     "alert_shorts": {"Fearful, use towel wrap": "Towel wrap"},
+     "history": [
+       {"days_ago": 173, "reason": "Senior wellness", "summary": "Weight down 0.8 lb in a year. Thyroid level at the top of normal.", "type": "Wellness", "provider_id": "prov-1", "medications": []}
+     ]},
+    {"id": "pat-11", "client_id": "cli-7", "name": "Duke", "species": "Canine", "breed": "Labrador Retriever", "age": 9,
+     "sex": "Male, neutered", "color": "Black", "microchip": "900000000000111",
+     "weights": [{"days_ago": 95, "value": 84, "unit": "lb"}],
+     "reminders": [{"text": "DHPP vaccine", "due_in_days": 40}],
+     "alerts": [],
+     "history": [
+       {"days_ago": 95, "reason": "Annual wellness", "summary": "Healthy. Small soft lump on the left side, to measure next visit.", "type": "Wellness", "provider_id": "prov-1", "medications": []}
+     ]},
+    {"id": "pat-12", "client_id": "cli-7", "name": "Ziggy", "species": "Avian", "breed": "Cockatiel", "age": 4,
+     "sex": "Male", "color": "Gray", "microchip": "",
+     "weights": [{"days_ago": 210, "value": 0.2, "unit": "lb"}],
+     "reminders": [],
+     "alerts": [],
+     "history": [
+       {"days_ago": 210, "reason": "Wellness exam", "summary": "Healthy. Seed heavy diet.", "type": "Wellness", "provider_id": "prov-2", "medications": []}
+     ]},
+    {"id": "pat-13", "client_id": "cli-8", "name": "Coco", "species": "Canine", "breed": "Chihuahua", "age": 7,
+     "sex": "Female, spayed", "color": "Fawn", "microchip": "900000000000113",
+     "weights": [{"days_ago": 60, "value": 6.2, "unit": "lb"}],
+     "reminders": [{"text": "Rabies vaccine", "due_in_days": 4}],
+     "alerts": [],
+     "history": [
+       {"days_ago": 60, "reason": "Dental check", "summary": "Tartar on the back teeth. Cleaning advised.", "type": "Sick", "provider_id": "prov-1", "medications": []}
+     ]},
+    {"id": "pat-14", "client_id": "cli-8", "name": "Max", "species": "Canine", "breed": "German Shepherd", "age": 5,
+     "sex": "Male, neutered", "color": "Black and tan", "microchip": "900000000000114",
+     "weights": [{"days_ago": 60, "value": 88, "unit": "lb"}],
+     "reminders": [{"text": "Heartworm test", "due_in_days": 30}],
+     "alerts": ["Muzzle for exams"],
+     "alert_shorts": {"Muzzle for exams": "Muzzle"},
+     "history": [
+       {"days_ago": 60, "reason": "Annual wellness", "summary": "Healthy. Muzzled for the exam.", "type": "Wellness", "provider_id": "prov-1", "medications": []}
+     ]},
+    {"id": "pat-15", "client_id": "cli-9", "name": "Bella", "species": "Canine", "breed": "Labrador Retriever", "age": 3, "sex": "Female, spayed", "color": "", "microchip": "", "weights": [{"days_ago": 300, "value": 61, "unit": "lb"}], "reminders": [], "alerts": [], "history": [{"days_ago": 300, "reason": "Annual wellness", "summary": "Healthy. Vaccines updated.", "type": "Wellness", "provider_id": "prov-1", "medications": []}]},
+    {"id": "pat-16", "client_id": "cli-10", "name": "Gus", "species": "Feline", "breed": "Domestic Shorthair", "age": 7, "sex": "Male, neutered", "color": "", "microchip": "", "weights": [{"days_ago": 200, "value": 12.4, "unit": "lb"}], "reminders": [], "alerts": [], "history": [{"days_ago": 200, "reason": "Annual wellness", "summary": "Healthy. Indoor only.", "type": "Wellness", "provider_id": "prov-1", "medications": []}]},
+    {"id": "pat-17", "client_id": "cli-11", "name": "Tucker", "species": "Canine", "breed": "Boxer mix", "age": 1, "sex": "Male", "color": "", "microchip": "", "weights": [{"days_ago": 60, "value": 38, "unit": "lb"}], "reminders": [], "alerts": [], "history": [{"days_ago": 60, "reason": "Puppy vaccines", "summary": "Second round of puppy vaccines.", "type": "Wellness", "provider_id": "prov-1", "medications": []}]},
+    {"id": "pat-18", "client_id": "cli-12", "name": "Cleo", "species": "Feline", "breed": "Siamese", "age": 10, "sex": "Female, spayed", "color": "", "microchip": "", "weights": [{"days_ago": 180, "value": 8.1, "unit": "lb"}], "reminders": [], "alerts": [], "history": [{"days_ago": 180, "reason": "Annual wellness", "summary": "Mild tartar.", "type": "Wellness", "provider_id": "prov-1", "medications": []}]},
+    {"id": "pat-19", "client_id": "cli-13", "name": "Pickles", "species": "Feline", "breed": "Domestic Longhair", "age": 5, "sex": "Male, neutered", "color": "", "microchip": "", "weights": [{"days_ago": 330, "value": 14.2, "unit": "lb"}], "reminders": [], "alerts": [], "history": []},
+    {"id": "pat-20", "client_id": "cli-14", "name": "Benny", "species": "Canine", "breed": "Cocker Spaniel", "age": 8, "sex": "Male, neutered", "color": "", "microchip": "", "weights": [{"days_ago": 14, "value": 29.5, "unit": "lb"}], "reminders": [], "alerts": [], "history": [{"days_ago": 14, "reason": "Ear infection, right", "summary": "Right ear infection. Drops for 10 days.", "type": "Sick", "provider_id": "prov-1", "medications": []}]},
+    {"id": "pat-21", "client_id": "cli-15", "name": "Rex", "species": "Canine", "breed": "Boxer", "age": 6, "sex": "Male, neutered", "color": "", "microchip": "", "weights": [{"days_ago": 250, "value": 71, "unit": "lb"}], "reminders": [], "alerts": [], "history": []},
+    {"id": "pat-22", "client_id": "cli-9", "name": "Sunny", "species": "Avian", "breed": "Budgerigar", "age": 3, "sex": "Male", "color": "", "microchip": "", "weights": [{"days_ago": 250, "value": 0.08, "unit": "lb"}], "reminders": [], "alerts": [], "history": []},
+    {"id": "pat-23", "client_id": "cli-16", "name": "Peanut", "species": "Guinea pig", "breed": "American", "age": 2, "sex": "Male", "color": "", "microchip": "", "weights": [{"days_ago": 120, "value": 2.1, "unit": "lb"}], "reminders": [], "alerts": [], "history": []},
+    {"id": "pat-24", "client_id": "cli-17", "name": "Smokey", "species": "Feline", "breed": "Domestic Shorthair", "age": 12, "sex": "Female, spayed", "color": "", "microchip": "", "weights": [{"days_ago": 174, "value": 9.3, "unit": "lb"}, {"days_ago": 540, "value": 10.4, "unit": "lb"}], "reminders": [{"text": "Thyroid recheck", "due_in_days": -84}], "alerts": ["Fearful, use towel wrap"], "alert_shorts": {"Fearful, use towel wrap": "Towel wrap"}, "pims_notes": ["Fear Free: exam in the bottom half of the carrier", "Gabapentin 100 mg given at home 2 hours before visits"], "history": [{"days_ago": 174, "reason": "Senior wellness", "summary": "Weight 9.3 lb, down from 10.4 lb. Thyroid level at the top of normal. Recheck the thyroid level in 3 months.", "type": "Wellness", "provider_id": "prov-1", "medications": []}]},
+    {"id": "pat-25", "client_id": "cli-18", "name": "Shadow", "species": "Canine", "breed": "Labrador mix", "age": 9, "sex": "Male, neutered", "color": "", "microchip": "", "weights": [{"days_ago": 90, "value": 76, "unit": "lb"}], "reminders": [], "alerts": [], "history": [{"days_ago": 90, "reason": "Annual wellness", "summary": "Heavy tartar. Dental cleaning booked.", "type": "Wellness", "provider_id": "prov-1", "medications": []}]},
+    {"id": "pat-26", "client_id": "cli-8", "name": "Pancho", "species": "Canine", "breed": "Chihuahua", "age": 4, "sex": "Male, neutered", "color": "", "microchip": "", "weights": [{"days_ago": 150, "value": 6.2, "unit": "lb"}], "reminders": [], "alerts": [], "history": []},
+    {"id": "pat-27", "client_id": "cli-8", "name": "Lola", "species": "Feline", "breed": "Domestic Shorthair", "age": 2, "sex": "Female, spayed", "color": "", "microchip": "", "weights": [{"days_ago": 365, "value": 8.8, "unit": "lb"}], "reminders": [], "alerts": [], "history": []},
+    {"id": "pat-28", "client_id": "cli-19", "name": "Bruno", "species": "Canine", "breed": "Rottweiler", "age": 5, "sex": "Male, neutered", "color": "", "microchip": "", "weights": [{"days_ago": 42, "value": 104, "unit": "lb"}], "reminders": [], "alerts": ["Muzzle for exams"], "alert_shorts": {"Muzzle for exams": "Muzzle"}, "pims_notes": ["Basket muzzle trained: the owner brings it"], "history": [{"days_ago": 42, "reason": "TPLO surgery, left knee", "summary": "TPLO on the left knee. Leash walks only for 8 weeks.", "type": "Surgery", "provider_id": "prov-1", "medications": []}]},
+    {"id": "pat-29", "client_id": "cli-20", "name": "Daisy", "species": "Canine", "breed": "Miniature Schnauzer", "age": 10, "sex": "Female, spayed", "color": "", "microchip": "", "weights": [{"days_ago": 30, "value": 17.8, "unit": "lb"}], "reminders": [], "alerts": [], "pims_notes": ["Vetsulin 6 units twice a day at home, with meals"], "history": [{"days_ago": 30, "reason": "Diabetes recheck", "summary": "Glucose curve sent. Same insulin dose.", "type": "Recheck", "provider_id": "prov-1", "medications": ["Vetsulin 6 units under the skin twice a day"]}]},
+    {"id": "pat-30", "client_id": "cli-21", "name": "Rosie", "species": "Canine", "breed": "English Bulldog", "age": 11, "sex": "Female, spayed", "color": "", "microchip": "", "weights": [{"days_ago": 365, "value": 48, "unit": "lb"}], "reminders": [], "alerts": ["Watch airway when restrained"], "alert_shorts": {"Watch airway when restrained": "Watch airway"}, "pims_notes": ["Gets hot quickly: keep the room cool and exams short"], "history": []},
+    {"id": "pat-31", "client_id": "cli-22", "name": "Milo", "species": "Canine", "breed": "Golden Retriever", "age": 4, "sex": "Male, neutered", "color": "", "microchip": "", "weights": [{"days_ago": 200, "value": 70, "unit": "lb"}], "reminders": [], "alerts": [], "history": []},
+    {"id": "pat-32", "client_id": "cli-23", "name": "Willow", "species": "Feline", "breed": "Domestic Shorthair", "age": 1, "sex": "Female, spayed", "color": "", "microchip": "", "weights": [{"days_ago": 90, "value": 7.4, "unit": "lb"}], "reminders": [], "alerts": [], "history": []},
+    {"id": "pat-33", "client_id": "cli-24", "name": "Thor", "species": "Canine", "breed": "Siberian Husky", "age": 7, "sex": "Male, neutered", "color": "", "microchip": "", "weights": [{"days_ago": 220, "value": 58, "unit": "lb"}], "reminders": [], "alerts": [], "history": []}
+  ],
+  "schedule": [
+    {"id": "appt-1", "time": "09:00", "duration": 30, "patient_id": "pat-1", "provider_id": "prov-1", "reason": "Ear scratching, head shaking", "type": "Sick", "room": "Exam 1"},
+    {"id": "appt-2", "time": "09:30", "duration": 30, "patient_id": "pat-2", "provider_id": "prov-1", "reason": "Kidney recheck", "type": "Recheck", "room": "Exam 2"},
+    {"id": "appt-3", "time": "10:00", "duration": 20, "patient_id": "pat-3", "provider_id": "prov-1", "reason": "Suture removal", "type": "Recheck", "room": "Exam 1"},
+    {"id": "appt-4", "time": "10:30", "duration": 45, "patient_id": "pat-4", "provider_id": "prov-1", "reason": "Annual wellness", "type": "Wellness", "room": "Exam 3"},
+    {"id": "appt-5", "time": "11:30", "duration": 30, "patient_id": "pat-5", "provider_id": "prov-2", "reason": "Vomiting x2 days", "type": "Sick", "room": "Exam 2"},
+    {"id": "appt-6", "time": "13:30", "duration": 30, "patient_id": "pat-6", "provider_id": "prov-1", "reason": "Limping, back legs", "type": "Sick", "room": "Exam 1"}
+  ],
+  "_week": "Every other day: each day of the week has its own visits (mon to sun). Today is always the schedule above.",
+  "week": {
+    "mon": [
+      {"id": "mon-1", "time": "08:30", "duration": 30, "patient_id": "pat-7", "provider_id": "prov-1", "reason": "Senior bloodwork", "type": "Wellness", "room": "Exam 2"},
+      {"id": "mon-2", "time": "09:30", "duration": 30, "patient_id": "pat-6", "provider_id": "prov-1", "reason": "Stiff getting up", "type": "Sick", "room": "Exam 1"},
+      {"id": "mon-3", "time": "11:00", "duration": 20, "patient_id": "pat-5", "provider_id": "prov-2", "reason": "FVRCP booster", "type": "Wellness", "room": "Exam 3"},
+      {"id": "mon-4", "time": "14:00", "duration": 20, "patient_id": "pat-1", "provider_id": "prov-1", "reason": "Itchy skin recheck", "type": "Recheck", "room": "Exam 1"}
+    ],
+    "tue": [
+      {"id": "tue-1", "time": "09:00", "duration": 20, "patient_id": "pat-3", "provider_id": "prov-1", "reason": "Paw laceration recheck", "type": "Recheck", "room": "Exam 1"},
+      {"id": "tue-2", "time": "10:15", "duration": 20, "patient_id": "pat-9", "provider_id": "prov-1", "reason": "Nail trim and weight check", "type": "Wellness", "room": "Exam 3"},
+      {"id": "tue-3", "time": "11:30", "duration": 30, "patient_id": "pat-2", "provider_id": "prov-2", "reason": "Blood pressure check", "type": "Recheck", "room": "Exam 2"},
+      {"id": "tue-4", "time": "15:00", "duration": 30, "patient_id": "pat-4", "provider_id": "prov-1", "reason": "Red skin folds", "type": "Sick", "room": "Exam 1"}
+    ],
+    "wed": [
+      {"id": "wed-1", "time": "09:00", "duration": 30, "patient_id": "pat-8", "provider_id": "prov-1", "reason": "Wellness exam", "type": "Wellness", "room": "Exam 3"},
+      {"id": "wed-2", "time": "10:00", "duration": 30, "patient_id": "pat-1", "provider_id": "prov-1", "reason": "Limping, right front", "type": "Sick", "room": "Exam 1"},
+      {"id": "wed-3", "time": "11:30", "duration": 20, "patient_id": "pat-5", "provider_id": "prov-2", "reason": "Sneezing recheck", "type": "Recheck", "room": "Exam 2"},
+      {"id": "wed-4", "time": "14:30", "duration": 30, "patient_id": "pat-3", "provider_id": "prov-2", "reason": "Ate a sock", "type": "Sick", "room": "Exam 2"}
+    ],
+    "thu": [
+      {"id": "thu-1", "time": "08:45", "duration": 20, "patient_id": "pat-6", "provider_id": "prov-1", "reason": "Dental recheck", "type": "Recheck", "room": "Exam 1"},
+      {"id": "thu-2", "time": "10:30", "duration": 30, "patient_id": "pat-7", "provider_id": "prov-1", "reason": "Stiff hips", "type": "Sick", "room": "Exam 2"},
+      {"id": "thu-3", "time": "13:00", "duration": 20, "patient_id": "pat-2", "provider_id": "prov-2", "reason": "Kidney panel draw", "type": "Recheck", "room": "Exam 2"},
+      {"id": "thu-4", "time": "14:30", "duration": 20, "patient_id": "pat-9", "provider_id": "prov-1", "reason": "Eating less hay", "type": "Sick", "room": "Exam 3"}
+    ],
+    "fri": [
+      {"id": "fri-1", "time": "09:00", "duration": 30, "patient_id": "pat-4", "provider_id": "prov-1", "reason": "Ear scratching", "type": "Sick", "room": "Exam 1"},
+      {"id": "fri-2", "time": "10:00", "duration": 20, "patient_id": "pat-3", "provider_id": "prov-1", "reason": "DHPP booster", "type": "Wellness", "room": "Exam 3"},
+      {"id": "fri-3", "time": "11:00", "duration": 20, "patient_id": "pat-5", "provider_id": "prov-2", "reason": "Weight check", "type": "Wellness", "room": "Exam 2"},
+      {"id": "fri-4", "time": "13:30", "duration": 20, "patient_id": "pat-1", "provider_id": "prov-1", "reason": "Rabies vaccine", "type": "Wellness", "room": "Exam 1"}
+    ],
+    "sat": [
+      {"id": "sat-1", "time": "09:00", "duration": 20, "patient_id": "pat-7", "provider_id": "prov-2", "reason": "Bloodwork results", "type": "Recheck", "room": "Exam 1"},
+      {"id": "sat-2", "time": "09:30", "duration": 20, "patient_id": "pat-9", "provider_id": "prov-2", "reason": "Nail trim", "type": "Wellness", "room": "Exam 1"}
+    ],
+    "sun": []
+  },
+  "_week_ahead": "Days after today: each day of the week has its own visits, none of them pets on today's schedule, so tomorrow never repeats today and no recheck lands before it is due.",
+  "week_ahead": {
+    "mon": [
+      {"id": "nx-mon-1", "time": "08:30", "duration": 30, "patient_id": "pat-7", "provider_id": "prov-1", "reason": "Senior bloodwork", "type": "Wellness", "room": "Exam 2"},
+      {"id": "nx-mon-2", "time": "09:30", "duration": 30, "patient_id": "pat-10", "provider_id": "prov-1", "reason": "Weight loss", "type": "Sick", "room": "Exam 1"},
+      {"id": "nx-mon-3", "time": "11:00", "duration": 20, "patient_id": "pat-12", "provider_id": "prov-2", "reason": "Feather plucking", "type": "Sick", "room": "Exam 3"},
+      {"id": "nx-mon-4", "time": "14:00", "duration": 30, "patient_id": "pat-11", "provider_id": "prov-1", "reason": "Lump check", "type": "Recheck", "room": "Exam 1"}
+    ],
+    "tue": [
+      {"id": "nx-tue-1", "time": "09:00", "duration": 60, "patient_id": "pat-13", "provider_id": "prov-1", "reason": "Dental cleaning", "type": "Dental", "room": "Exam 2"},
+      {"id": "nx-tue-2", "time": "10:15", "duration": 20, "patient_id": "pat-9", "provider_id": "prov-1", "reason": "Nail trim", "type": "Wellness", "room": "Exam 3"},
+      {"id": "nx-tue-3", "time": "11:30", "duration": 30, "patient_id": "pat-14", "provider_id": "prov-2", "reason": "Limping, left hind", "type": "Sick", "room": "Exam 1"},
+      {"id": "nx-tue-4", "time": "15:00", "duration": 20, "patient_id": "pat-8", "provider_id": "prov-1", "reason": "Beak trim", "type": "Wellness", "room": "Exam 3"}
+    ],
+    "wed": [
+      {"id": "nx-wed-1", "time": "09:00", "duration": 30, "patient_id": "pat-12", "provider_id": "prov-1", "reason": "Wellness exam", "type": "Wellness", "room": "Exam 3"},
+      {"id": "nx-wed-2", "time": "10:00", "duration": 20, "patient_id": "pat-7", "provider_id": "prov-1", "reason": "Bloodwork results", "type": "Recheck", "room": "Exam 2"},
+      {"id": "nx-wed-3", "time": "11:30", "duration": 30, "patient_id": "pat-13", "provider_id": "prov-2", "reason": "Cough", "type": "Sick", "room": "Exam 1"},
+      {"id": "nx-wed-4", "time": "14:30", "duration": 30, "patient_id": "pat-10", "provider_id": "prov-2", "reason": "Thyroid recheck", "type": "Recheck", "room": "Exam 1"}
+    ],
+    "thu": [
+      {"id": "nx-thu-1", "time": "08:45", "duration": 45, "patient_id": "pat-14", "provider_id": "prov-1", "reason": "Annual wellness", "type": "Wellness", "room": "Exam 2"},
+      {"id": "nx-thu-2", "time": "10:30", "duration": 20, "patient_id": "pat-9", "provider_id": "prov-1", "reason": "Eating less hay", "type": "Sick", "room": "Exam 3"},
+      {"id": "nx-thu-3", "time": "13:00", "duration": 20, "patient_id": "pat-11", "provider_id": "prov-2", "reason": "Ear check", "type": "Sick", "room": "Exam 1"},
+      {"id": "nx-thu-4", "time": "14:30", "duration": 20, "patient_id": "pat-8", "provider_id": "prov-1", "reason": "Weight check", "type": "Wellness", "room": "Exam 3"}
+    ],
+    "fri": [
+      {"id": "nx-fri-1", "time": "09:00", "duration": 30, "patient_id": "pat-13", "provider_id": "prov-1", "reason": "Vaccines", "type": "Wellness", "room": "Exam 1"},
+      {"id": "nx-fri-2", "time": "10:00", "duration": 30, "patient_id": "pat-10", "provider_id": "prov-1", "reason": "Blood pressure check", "type": "Recheck", "room": "Exam 2"},
+      {"id": "nx-fri-3", "time": "11:00", "duration": 20, "patient_id": "pat-12", "provider_id": "prov-2", "reason": "Nail trim", "type": "Wellness", "room": "Exam 3"},
+      {"id": "nx-fri-4", "time": "13:30", "duration": 30, "patient_id": "pat-7", "provider_id": "prov-1", "reason": "Stiff hips", "type": "Recheck", "room": "Exam 1"}
+    ],
+    "sat": [
+      {"id": "nx-sat-1", "time": "09:00", "duration": 30, "patient_id": "pat-11", "provider_id": "prov-2", "reason": "Skin check", "type": "Sick", "room": "Exam 1"},
+      {"id": "nx-sat-2", "time": "09:30", "duration": 20, "patient_id": "pat-9", "provider_id": "prov-2", "reason": "Weight check", "type": "Wellness", "room": "Exam 1"}
+    ],
+    "sun": []
+  },
+  "_busy_day": "A heavy day, two days after today: 20 visits and 24 pets for Dr. Rivera, with the Lee and Garcia households booked as one visit each (pets). It reads as it stands at clock (clinic time), between visits: the first 9 are done (started_late minutes after their time, so the pace comes from the record), and the Lee household is still to come.",
+  "busy_day": {
+    "days_ahead": 2,
+    "clock": "13:15",
+    "visits": [
+      {"id": "bz-1", "time": "08:00", "duration": 20, "patient_id": "pat-15", "provider_id": "prov-1", "reason": "Vaccines", "type": "Wellness", "room": "Exam 1", "started_late": 0},
+      {"id": "bz-2", "time": "08:20", "duration": 20, "patient_id": "pat-16", "provider_id": "prov-1", "reason": "Vomiting", "type": "Sick", "room": "Exam 2", "started_late": 0},
+      {"id": "bz-3", "time": "08:40", "duration": 20, "patient_id": "pat-17", "provider_id": "prov-1", "reason": "Puppy vaccines", "type": "Wellness", "room": "Exam 1", "started_late": 5},
+      {"id": "bz-4", "time": "09:00", "duration": 30, "patient_id": "pat-18", "provider_id": "prov-1", "reason": "Dental check", "type": "Sick", "room": "Exam 3", "started_late": 5},
+      {"id": "bz-5", "time": "09:40", "duration": 30, "patient_id": "pat-19", "provider_id": "prov-1", "reason": "Not using the litter box", "type": "Sick", "room": "Exam 2", "started_late": 10},
+      {"id": "bz-6", "time": "10:20", "duration": 20, "patient_id": "pat-20", "provider_id": "prov-1", "reason": "Ear recheck", "type": "Recheck", "room": "Exam 1", "started_late": 10},
+      {"id": "bz-7", "time": "10:45", "duration": 30, "patient_id": "pat-21", "provider_id": "prov-1", "reason": "Itchy paws", "type": "Sick", "room": "Exam 3", "started_late": 10},
+      {"id": "bz-8", "time": "11:30", "duration": 20, "patient_id": "pat-22", "provider_id": "prov-1", "reason": "Nail and beak trim", "type": "Wellness", "room": "Exam 2", "started_late": 10},
+      {"id": "bz-9", "time": "12:30", "duration": 30, "patient_id": "pat-23", "provider_id": "prov-1", "reason": "Overgrown teeth", "type": "Sick", "room": "Exam 1", "started_late": 15},
+      {"id": "bz-10", "time": "13:30", "duration": 30, "patient_id": "pat-24", "provider_id": "prov-1", "reason": "Weight loss, drinking more", "type": "Sick", "room": "Exam 2", "status": "In room", "checked_in": "13:04"},
+      {"id": "bz-11", "time": "13:45", "duration": 20, "patient_id": "pat-12", "provider_id": "prov-1", "reason": "Feather plucking", "type": "Sick", "room": "Exam 3"},
+      {"id": "bz-12", "time": "14:00", "duration": 45, "patient_id": "pat-7", "provider_id": "prov-1", "reason": "Household visit", "type": "Sick", "room": "Exam 1", "pets": [{"patient_id": "pat-7", "reason": "Stiff getting up"}, {"patient_id": "pat-8", "reason": "Wellness exam"}, {"patient_id": "pat-9", "reason": "Eating less hay"}]},
+      {"id": "bz-13", "time": "14:45", "duration": 30, "patient_id": "pat-25", "provider_id": "prov-1", "reason": "Dental cleaning", "type": "Dental", "room": "Exam 2"},
+      {"id": "bz-14", "time": "15:15", "duration": 45, "patient_id": "pat-13", "provider_id": "prov-1", "reason": "Household visit", "type": "Wellness", "room": "Exam 1", "pets": [{"patient_id": "pat-13", "reason": "Vaccines"}, {"patient_id": "pat-26", "reason": "Cough"}, {"patient_id": "pat-27", "reason": "Wellness exam"}]},
+      {"id": "bz-15", "time": "16:00", "duration": 20, "patient_id": "pat-28", "provider_id": "prov-1", "reason": "TPLO recheck", "type": "Recheck", "room": "Exam 3"},
+      {"id": "bz-16", "time": "16:20", "duration": 20, "patient_id": "pat-29", "provider_id": "prov-1", "reason": "Diabetes recheck", "type": "Recheck", "room": "Exam 2"},
+      {"id": "bz-17", "time": "16:40", "duration": 30, "patient_id": "pat-30", "provider_id": "prov-1", "reason": "Senior wellness", "type": "Wellness", "room": "Exam 1"},
+      {"id": "bz-18", "time": "17:10", "duration": 20, "patient_id": "pat-31", "provider_id": "prov-1", "reason": "Hot spot", "type": "Sick", "room": "Exam 3"},
+      {"id": "bz-19", "time": "17:30", "duration": 15, "patient_id": "pat-32", "provider_id": "prov-1", "reason": "Vaccines", "type": "Wellness", "room": "Exam 2"},
+      {"id": "bz-20", "time": "17:45", "duration": 30, "patient_id": "pat-33", "provider_id": "prov-1", "reason": "Limping, front leg", "type": "Sick", "room": "Exam 1"}
+    ]
+  },
+  "_notes": "Past medical notes as the practice system stores them: one text per note, written by provider_id. Synced at onboarding.",
+  "notes": [
+    {"id": "note-101", "patient_id": "pat-1", "provider_id": "prov-1", "days_ago": 62, "text": "S: Owner reports itching around face x1 wk. Eating well.\nO:\n- T 101.6 F, HR 96, RR 24\n- MM pink, CRT <2s\n- Mild facial erythema, no otic d/c\nA: Suspect environmental allergy.\nP:\n- Rx Apoquel 16 mg PO BID x14d, then SID\n- Recheck 4 wk"},
+    {"id": "note-102", "patient_id": "pat-3", "provider_id": "prov-1", "days_ago": 14, "text": "S: Cut R front paw on fence this AM. Bleeding stopped.\nO:\n- T 101.9 F, HR 110\n- 3 cm laceration R front metacarpal pad, clean edges\nA: Laceration, R front paw.\nP:\n- Sutured under sedation\n- Rx Cephalexin 500 mg PO BID x10d\n- E-collar, recheck 10-14d"},
+    {"id": "note-103", "patient_id": "pat-6", "provider_id": "prov-1", "days_ago": 30, "text": "S: Hx of soft stool x3d after diet change.\nO:\n- T 101.4 F, HR 100\n- BCS 6/9, abdomen soft\nA: Diet-related diarrhea.\nP:\n- Bland diet 5d, transition back slowly\n- Rx metronidazole 250 mg PO BID x5d"},
+    {"id": "note-201", "patient_id": "pat-5", "provider_id": "prov-2", "days_ago": 40, "text": "Subjective: Pepper has been sneezing for about a week, with clear nasal discharge and normal appetite. Owner has not noticed any coughing.\nObjective: Temperature was 102.1 F and heart rate 160. There was mild serous nasal discharge bilaterally and the lungs sounded clear on auscultation.\nAssessment: Most consistent with an upper respiratory infection, likely viral.\nPlan: Supportive care at home with humidity and appetite monitoring. The owner will call if the discharge turns green or he stops eating."},
+    {"id": "note-202", "patient_id": "pat-2", "provider_id": "prov-2", "days_ago": 9, "text": "Subjective: Miso came in while Dr. Rivera was out because the owner noticed increased thirst and urination over the past two weeks.\nObjective: Blood pressure measured 178 mmHg systolic. Weight was 8.9 lb, down from 9.4 lb at the last visit. Fractious, handled with a towel wrap.\nAssessment: Hypertension secondary to chronic kidney disease is suspected.\nPlan: Started amlodipine 0.625 mg by mouth once daily. Recheck blood pressure in two weeks and repeat the kidney panel at that visit."},
+    {"id": "note-104", "patient_id": "pat-7", "provider_id": "prov-2", "days_ago": 42, "text": "S: Hazel has eaten less for 3 days. One episode of vomiting yesterday. Drinking normally.\nO:\n- T 101.2 F, HR 92\n- Mild tartar, soft abdomen, no pain on palpation\n- Weight 27.4 lb\nA: Mild gastritis. Senior bloodwork due in a few weeks.\nP:\n- Bland diet 4d\n- Rx Famotidine 10 mg PO BID x7d\n- Recheck if not eating in 48h"}
+  ],
+  "_invoices": "Invoices per household, with line items. Totals are the sum of the items.",
+  "invoices": [
+    {"id": "inv-1001", "client_id": "cli-1", "patient_id": "pat-1", "days_ago": 120, "visit": "Annual wellness", "provider_id": "prov-1", "status": "paid", "paid_by": "Card",
+     "items": [{"name": "Wellness exam", "qty": 1, "price": 68}, {"name": "Rabies vaccine", "qty": 1, "price": 32}, {"name": "DHPP vaccine", "qty": 1, "price": 38}, {"name": "Heartworm test", "qty": 1, "price": 54}]},
+    {"id": "inv-1002", "client_id": "cli-1", "patient_id": "pat-1", "days_ago": 300, "visit": "Ear infection, left", "provider_id": "prov-2", "status": "paid", "paid_by": "Card",
+     "items": [{"name": "Sick exam", "qty": 1, "price": 68}, {"name": "Ear cytology", "qty": 1, "price": 45}, {"name": "Otic drops", "qty": 1, "price": 34.4}]},
+    {"id": "inv-1003", "client_id": "cli-1", "patient_id": "pat-6", "days_ago": 60, "visit": "Dental cleaning", "provider_id": "prov-1", "status": "paid", "paid_by": "Card",
+     "items": [{"name": "Dental cleaning", "qty": 1, "price": 420}, {"name": "Extraction", "qty": 2, "price": 85}, {"name": "Anesthesia", "qty": 1, "price": 145}, {"name": "Pain medicine", "qty": 1, "price": 22.5}]},
+    {"id": "inv-1004", "client_id": "cli-1", "patient_id": "pat-6", "days_ago": 30, "visit": "Soft stool", "provider_id": "prov-1", "status": "open", "paid_by": null,
+     "items": [{"name": "Sick exam", "qty": 1, "price": 68}, {"name": "Metronidazole 250 mg", "qty": 10, "price": 1.89}]},
+    {"id": "inv-1005", "client_id": "cli-1", "patient_id": "pat-1", "days_ago": 62, "visit": "Itchy face", "provider_id": "prov-1", "status": "paid", "paid_by": "Card",
+     "items": [{"name": "Sick exam", "qty": 1, "price": 68}, {"name": "Apoquel 16 mg", "qty": 30, "price": 2.95}]},
+    {"id": "inv-2001", "client_id": "cli-2", "patient_id": "pat-2", "days_ago": 9, "visit": "Increased thirst", "provider_id": "prov-2", "status": "paid", "paid_by": "Card",
+     "items": [{"name": "Sick exam", "qty": 1, "price": 68}, {"name": "Blood pressure", "qty": 1, "price": 35}, {"name": "Amlodipine 0.625 mg", "qty": 30, "price": 0.71}]},
+    {"id": "inv-2002", "client_id": "cli-2", "patient_id": "pat-2", "days_ago": 45, "visit": "Senior bloodwork", "provider_id": "prov-1", "status": "paid", "paid_by": "Card",
+     "items": [{"name": "Wellness exam", "qty": 1, "price": 68}, {"name": "Senior blood panel", "qty": 1, "price": 165}]},
+    {"id": "inv-3001", "client_id": "cli-3", "patient_id": "pat-3", "days_ago": 14, "visit": "Laceration, right front paw", "provider_id": "prov-1", "status": "open", "paid_by": null,
+     "items": [{"name": "Sick exam", "qty": 1, "price": 68}, {"name": "Sedation", "qty": 1, "price": 95}, {"name": "Laceration repair", "qty": 1, "price": 180}, {"name": "Cephalexin 500 mg", "qty": 20, "price": 1.34}, {"name": "E-collar", "qty": 1, "price": 18}]},
+    {"id": "inv-5001", "client_id": "cli-5", "patient_id": "pat-5", "days_ago": 40, "visit": "Sneezing", "provider_id": "prov-2", "status": "paid", "paid_by": "Cash",
+     "items": [{"name": "Sick exam", "qty": 1, "price": 68}]},
+    {"id": "inv-5002", "client_id": "cli-5", "patient_id": "pat-5", "days_ago": 200, "visit": "Kitten vaccines", "provider_id": "prov-2", "status": "paid", "paid_by": "Card",
+     "items": [{"name": "Wellness exam", "qty": 1, "price": 68}, {"name": "FVRCP vaccine", "qty": 1, "price": 36}, {"name": "Rabies vaccine", "qty": 1, "price": 32}]},
+    {"id": "inv-1006", "client_id": "cli-1", "patient_id": "pat-7", "days_ago": 42, "visit": "Decreased appetite", "provider_id": "prov-2", "status": "paid", "paid_by": "Card",
+     "items": [{"name": "Sick exam", "qty": 1, "price": 68}, {"name": "Famotidine 10 mg", "qty": 7, "price": 0.15}]},
+    {"id": "inv-1007", "client_id": "cli-1", "patient_id": "pat-7", "days_ago": 400, "visit": "Senior wellness", "provider_id": "prov-1", "status": "paid", "paid_by": "Card",
+     "items": [{"name": "Wellness exam", "qty": 1, "price": 68}, {"name": "Senior blood panel", "qty": 1, "price": 165}]},
+    {"id": "inv-1008", "client_id": "cli-1", "patient_id": "pat-8", "days_ago": 546, "visit": "Annual wellness", "provider_id": "prov-1", "status": "paid", "paid_by": "Card",
+     "items": [{"name": "Avian wellness exam", "qty": 1, "price": 58}, {"name": "Nail and beak trim", "qty": 1, "price": 22}]},
+    {"id": "inv-1009", "client_id": "cli-1", "patient_id": "pat-9", "days_ago": 89, "visit": "Annual wellness", "provider_id": "prov-1", "status": "paid", "paid_by": "Card",
+     "items": [{"name": "Rabbit wellness exam", "qty": 1, "price": 48}]},
+    {"id": "inv-1010", "client_id": "cli-1", "patient_id": "pat-9", "days_ago": 400, "visit": "Nail trim and weight check", "provider_id": "prov-1", "status": "paid", "paid_by": "Card",
+     "items": [{"name": "Nail trim", "qty": 1, "price": 18}]}
+  ],
+  "_messages": "Recent texts with each owner, at a clock time on an earlier day (days_ago 1 is yesterday), so they read right at any time of day.",
+  "messages": [
+    {"client_id": "cli-1", "days_ago": 1, "time": "16:12", "direction": "in", "text": "Biscuit is shaking his head again, can we come in tomorrow?"},
+    {"client_id": "cli-1", "days_ago": 1, "time": "16:20", "direction": "out", "text": "Hi Jordan, Biscuit is booked for 9:00 AM tomorrow with Dr. Rivera."},
+    {"client_id": "cli-1", "days_ago": 1, "time": "16:31", "direction": "in", "text": "Thank you! We'll be there."},
+    {"client_id": "cli-2", "days_ago": 1, "time": "10:05", "direction": "out", "text": "Reminder: Miso's kidney recheck is tomorrow at 9:30 AM."},
+    {"client_id": "cli-3", "days_ago": 1, "time": "19:48", "direction": "in", "text": "Rocket's cone keeps slipping off at night. Is that okay?"}
+  ],
+  "_updates": "What came in since yesterday, for the morning brief's New since yesterday, at a clock time on an earlier day.",
+  "updates": [
+    {"kind": "result", "days_ago": 1, "time": "18:05", "patient_id": "pat-2", "text": "Kidney panel results are in for Miso", "detail": "Kidney panel"},
+    {"kind": "booked", "days_ago": 1, "time": "17:40", "patient_id": "pat-5", "text": "Pepper was booked online for 11:30 AM today", "detail": "11:30 AM today"},
+    {"kind": "reply", "days_ago": 1, "time": "16:12", "patient_id": "pat-1", "text": "Jordan Lee replied: Biscuit is shaking his head again", "detail": "Jordan Lee: Biscuit is shaking his head again"}
+  ]
+}

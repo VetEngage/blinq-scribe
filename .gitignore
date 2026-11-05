@@ -1,0 +1,30 @@
+.env
+var/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.iml
+.idea/
+# Private local notes (never commit)
+server/private/
+
+# Local tool state and virtualenvs (never commit)
+.omc/
+**/.omc/
+.venv/
+**/.venv/
+
+# macOS and Xcode local files
+.DS_Store
+xcuserdata/
+
+# Web app (pnpm workspace)
+node_modules/
+web/dist/
+.turbo/
+web/test-results/
+web/playwright-report/
+
+# Python tool caches
+.ruff_cache/
+.mypy_cache/

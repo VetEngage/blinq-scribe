@@ -1,0 +1,7 @@
+Hi {{ name }},
+
+Use this code to finish signing in to Blinq Scribe:
+
+{{ code }}
+
+It works for {{ minutes }} minutes. If you didn't ask for this, you can ignore this email.

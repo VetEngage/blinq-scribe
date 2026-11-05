@@ -1,0 +1,93 @@
+[project]
+name = "blinqscribe"
+version = "0.1.0"
+description = "Blinq Scribe server: an AI scribe for veterinary visits"
+license = "MIT"
+requires-python = ">=3.14,<3.15"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "pydantic>=2.8",
+    "python-multipart>=0.0.9",
+    "httpx>=0.27",
+    "openai>=1.50",
+    "authlib>=1.9.1",
+    "joserfc>=1.7.7",
+    "aiosmtplib>=5.1.3",
+    "jinja2>=3.1.6",
+    "strawberry-graphql>=0.315.7",
+    "httpx2>=2.16.0",
+    "peewee>=4.0",
+    "peewee-async[postgresql]>=2.0",
+    "aiosqlite>=0.21",
+    "alembic>=1.15",
+    "temporalio>=1.30",
+    "psycopg2-binary>=2.9.9",
+    "casbin>=1.43.0",
+    "onnxruntime>=1.20",
+    "numpy>=2.0",
+    "misaki>=0.9.4",
+    "pillow>=11",
+    "pypdf>=5",
+    "pyotp>=2.10.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "anyio>=4",
+    "ruff>=0.14",
+    "mypy>=1.18",
+    "types-authlib>=1.8.0.20260911",
+    "types-peewee>=4.5.3.20261029",
+    "types-psycopg2>=2.9.21.20261030",
+]
+
+[tool.uv]
+# The server runs from this folder (`uvicorn blinqscribe.main:app`), it is not installed.
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+markers = ["confirms_left: sign the note with its [confirm] marks left in"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py314"
+extend-exclude = ["private", "var", "data"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "C4", "RUF"]
+ignore = [
+    # str + Enum on purpose: StrEnum changes str() and format() of the members.
+    "UP042",
+    # Curly quotes and apostrophes are real text here (owner messages, tests).
+    "RUF001",
+    "RUF002",
+    "RUF003",
+]
+
+[tool.ruff.lint.flake8-bugbear]
+# FastAPI dependencies are declared as call defaults.
+extend-immutable-calls = [
+    "fastapi.Depends",
+    "fastapi.File",
+    "fastapi.Form",
+    "fastapi.Header",
+    "fastapi.Query",
+    "fastapi.Body",
+]
+
+[tool.mypy]
+python_version = "3.14"
+strict = true
+files = ["blinqscribe"]
+# Types for libraries that ship none (peewee-async).
+mypy_path = "typings"
+plugins = ["pydantic.mypy"]
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
